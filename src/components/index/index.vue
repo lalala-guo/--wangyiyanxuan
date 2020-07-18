@@ -34,13 +34,64 @@
                 </div>
             </div>
         </div>
+
+        <!-- Swiper -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="../../../public/images/01.webp" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="../../../public/images/02.webp" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="../../../public/images/03.webp" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="../../../public/images/04.webp" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="../../../public/images/05.webp" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="../../../public/images/06.webp" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="../../../public/images/07.webp" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="../../../public/images/08.webp" />
+                </div>
+            </div>
+
+            <div class="swiper-pagination">
+                <span class="swiper-pagination-bottom"></span>
+                <span class="swiper-pagination-bottom"></span>
+                <span class="swiper-pagination-bottom"></span>
+                <span class="swiper-pagination-bottom"></span>
+                <span class="swiper-pagination-bottom"></span>
+                <span class="swiper-pagination-bottom"></span>
+                <span class="swiper-pagination-bottom"></span>
+                <span class="swiper-pagination-bottom"></span>
+            </div>
+        </div>
     </div>
   
 </template>
 
 <script>
+import '../../package/swiper-bundle.min.css'
+import '../../package/swiper-bundle.min.js'
+// import '../../swiper.js'
+import Swiper from 'swiper'
   export default {
-    
+    mounted(){
+        var swiper = new Swiper('.swiper-container', {
+            pagination: {
+                el: '.swiper-pagination',
+            },
+        });
+    }
   }
 </script>
 
@@ -166,5 +217,50 @@
         background-size: 100% 100%;
     }
 
+
+    .swiper-container {
+      width: 100%;
+      height: 3.94667rem;
+    }
+
+    .swiper-slide {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-size: 0.48rem;
+      background: #fff;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+    .swiper-slide img{
+        width: 100%;
+        height: 100%;
+    }
+    .swiper-pagination{
+        position: absolute;
+        bottom: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+    }
+    .swiper-pagination .swiper-pagination-bottom{
+        width: .53333rem;
+        height: .05333rem;
+        display: inline-block;
+        background: #fff;
+        opacity: .4;
+        border-radius: 0;
+        margin-right: .13333rem;
+    }
 
 </style>
