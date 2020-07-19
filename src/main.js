@@ -4,7 +4,17 @@ import App from "./App";
 
 import router from './router/index'
 
-// import router from "./router";
+// swiper
+// import { Swipe, SwipeItem } from 'vant';
+// Vue.use(Swipe);
+// Vue.use(SwipeItem);
+
+// tab
+// import { Tab, Tabs } from 'vant';
+// Vue.use(Tab);
+// Vue.use(Tabs);
+
+
 
 new Vue({
 //   el: "#root",

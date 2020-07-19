@@ -8,15 +8,24 @@
           <i class="icon"></i>
           <span>搜索商品, 共34087款好物</span>
         </div>
-        <!-- <button class="btn">登录</button> -->
-        <van-button class="btn" hairline type="danger">登录</van-button>
+        <!-- <button class="btn">登录</button>   hairline -->
+        <van-button class="btn" plain type="danger">登录</van-button>
       </div>
-      <!-- 导航 -->
+      <!-- 导航    ref="scroll" -->
+      <!-- <div class="navContainer" >
+        <van-tabs class="left" v-model="active" swipeable>
+          <van-tab class="navItem active" title="推荐" ></van-tab>
+          <van-tab class="navItem" title="居家生活"></van-tab>
+          <van-tab class="navItem" title="服饰鞋包"></van-tab>
+          <van-tab class="navItem" title="美食酒水"></van-tab>
+          <van-tab class="navItem" title="美食酒水"></van-tab>
+          <van-tab class="navItem" title="美食酒水"></van-tab>
+          <van-tab class="navItem" title="美食酒水"></van-tab>
+          <van-tab class="navItem" title="美食酒水"></van-tab>
+          <van-tab class="navItem" title="美食酒水"></van-tab>
+        </van-tabs> -->
       <div class="navContainer" ref="scroll">
         <div class="left">
-          <!-- <div class="navItem active" v-for="(item, index) in emojis" :key="index">
-                        <span>{{item}}</span>
-          </div>-->
           <div class="navItem active">
             <span>推荐</span>
           </div>
@@ -29,6 +38,16 @@
           <div class="navItem">
             <span>美食酒水</span>
           </div>
+          <!-- active -->
+          <div class="navItem">
+            <span>美食酒水</span>
+          </div>
+          <div class="navItem">
+            <span>美食酒水</span>
+          </div>
+          <div class="navItem">
+            <span>美食酒水</span>
+          </div>
           <div class="navItem">
             <span>美食酒水</span>
           </div>
@@ -36,6 +55,7 @@
             <span>美食酒水</span>
           </div>
         </div>
+        
         <div class="right">
           <div class="linear"></div>
           <div class="xiala">
@@ -43,6 +63,15 @@
           </div>
         </div>
       </div>
+        
+      <!-- <van-tabs v-model="active" swipeable>
+        <van-tab v-for="index in 4" :title="'选项 ' + index">
+          内容 {{ index }}
+        </van-tab>
+      </van-tabs> -->
+
+
+
     </div>
 
     <!-- scroll -->
@@ -53,15 +82,18 @@
 </template>
 
 <script>
-import request from "../../utils/request.js";
 import BScroll from "@better-scroll/core";
 import ScroolIndex from "../../pages/scrollIndex/scrollIndex.vue";
 
 export default {
+  data() {
+    return {
+      active: 2,
+    };
+  },
   components: {
     ScroolIndex
   },
-
   mounted() {
     this.init();
   },
@@ -137,7 +169,7 @@ export default {
   white-space: nowrap;
   text-align: center;
   color: #dd1a21;
-  border-radius: 4px;
+  border-radius: 8px;
   margin-left: 16px;
   font-size: 24px;
   background: white;
@@ -152,7 +184,6 @@ export default {
   overflow: hidden;
 }
 .navContainer .left {
-  width: 100%;
   height: 60px;
   display: flex;
   align-items: center;
