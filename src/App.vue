@@ -73,9 +73,8 @@ export default {
     *{
         margin: 0;
         padding: 0;
-        color: #333;
+        /* color: #333; */
         box-sizing: border-box;
-        
         font-family: PingFangSC-Light,helvetica,'Heiti SC';
     }
     .tabBarWrap{

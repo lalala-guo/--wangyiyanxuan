@@ -27,8 +27,10 @@
           <div class="linear"></div>
           <div class="xiala">
             <i class="icon"></i>
+            <i class="icon"></i>
           </div>
         </div>
+        
       </div>
     </div>
 
@@ -56,7 +58,8 @@ export default {
   },
   async mounted() {
     this.init();
-    this.getIndexCateData()
+
+    await this.getIndexCateData()
   },
   beforeDestroy() {
     this.bs.destroy();
@@ -77,16 +80,15 @@ export default {
       this.navIndex = navIndex
     },
 
-
-
-
-
-
-
     init() {
       this.bs = new BScroll(this.$refs.scroll, {
-        scrollX: true
-        //   probeType: 3 // listening scroll hook
+        mouseWheel: true,
+        disableMouse:false,
+        disableTouch: false,
+        resizePolling: 0,
+        click: true,
+        scrollX: true,
+        probeType: 3 // listening scroll hook
       });
       this._registerHooks(["scroll", "scrollEnd"], pos => {
         //   console.log('done')
@@ -102,9 +104,18 @@ export default {
 </script>
 
 <style >
+/* .indexContainer{
+  position: relative;
+  overflow: hidden;
+} */
 .headerContainer{
+    /* z-index: 99; */
+    /* position: flex;
+    top: 0;
+    left: 0; */
     width: 100%;
     height: 148px;
+    background: white;
 }
 /* 头部 */
 .header {
@@ -166,7 +177,7 @@ export default {
   overflow: hidden;
 }
 .navContainer .left {
-  width: 650px;
+  /* width: 650px; */
   height: 60px;
   display: flex;
   align-items: center;
@@ -236,7 +247,9 @@ export default {
   background-size: 100% 100%;
 }
 
+
 .container {
   /* height: calc(100vh - 148px); */
+  /* margin-top: 148px; */
 }
 </style>
