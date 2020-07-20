@@ -11,51 +11,17 @@
         <!-- <button class="btn">登录</button>   hairline -->
         <van-button class="btn" plain type="danger">登录</van-button>
       </div>
-      <!-- 导航    ref="scroll" -->
-      <!-- <div class="navContainer" >
-        <van-tabs class="left" v-model="active" swipeable>
-          <van-tab class="navItem active" title="推荐" ></van-tab>
-          <van-tab class="navItem" title="居家生活"></van-tab>
-          <van-tab class="navItem" title="服饰鞋包"></van-tab>
-          <van-tab class="navItem" title="美食酒水"></van-tab>
-          <van-tab class="navItem" title="美食酒水"></van-tab>
-          <van-tab class="navItem" title="美食酒水"></van-tab>
-          <van-tab class="navItem" title="美食酒水"></van-tab>
-          <van-tab class="navItem" title="美食酒水"></van-tab>
-          <van-tab class="navItem" title="美食酒水"></van-tab>
-        </van-tabs> -->
+      <!-- 导航  -->
       <div class="navContainer" ref="scroll">
         <div class="left">
-          <div class="navItem active">
+          <div class="navItem" @click="changeNavId(0)" :class="{active: navIndex === 0}">
             <span>推荐</span>
           </div>
-          <div class="navItem">
-            <span>居家生活</span>
-          </div>
-          <div class="navItem">
-            <span>服饰鞋包</span>
-          </div>
-          <div class="navItem">
-            <span>美食酒水</span>
-          </div>
-          <!-- active -->
-          <div class="navItem">
-            <span>美食酒水</span>
-          </div>
-          <div class="navItem">
-            <span>美食酒水</span>
-          </div>
-          <div class="navItem">
-            <span>美食酒水</span>
-          </div>
-          <div class="navItem">
-            <span>美食酒水</span>
-          </div>
-          <div class="navItem">
-            <span>美食酒水</span>
+          <div class="navItem" @click="changeNavId(index+1)" :class="{active: navIndex === (index+1)}" v-for="(item, index) in navList" :key="index">
+            <span>{{item.name}}</span>
           </div>
         </div>
-        
+      <!-- 右侧 -->
         <div class="right">
           <div class="linear"></div>
           <div class="xiala">
@@ -63,15 +29,6 @@
           </div>
         </div>
       </div>
-        
-      <!-- <van-tabs v-model="active" swipeable>
-        <van-tab v-for="index in 4" :title="'选项 ' + index">
-          内容 {{ index }}
-        </van-tab>
-      </van-tabs> -->
-
-
-
     </div>
 
     <!-- scroll -->
@@ -82,25 +39,47 @@
 </template>
 
 <script>
-import BScroll from "@better-scroll/core";
 import ScroolIndex from "../../pages/scrollIndex/scrollIndex.vue";
 
+import BScroll from "@better-scroll/core";
+import {mapState, mapMutations, mapActions, mapGetters} from 'vuex'
 export default {
   data() {
     return {
       active: 2,
+      navIndex: 0,  // 点击的下标
     };
   },
   components: {
     ScroolIndex
   },
-  mounted() {
+  async mounted() {
     this.init();
+    this.getIndexData()
   },
   beforeDestroy() {
     this.bs.destroy();
   },
+  computed:{
+    ...mapState({
+      navList: state => state.index.indexData
+    })
+  },
   methods: {
+    ...mapActions({
+      getIndexData: "getIndexData"
+    }),
+    changeNavId(navIndex){
+      console.log(navIndex);
+      this.navIndex = navIndex
+    },
+
+
+
+
+
+
+
     init() {
       this.bs = new BScroll(this.$refs.scroll, {
         scrollX: true
