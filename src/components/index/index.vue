@@ -166,10 +166,12 @@ export default {
   overflow: hidden;
 }
 .navContainer .left {
+  width: 650px;
   height: 60px;
   display: flex;
   align-items: center;
   padding: 0 30px;
+  box-sizing: border-box;
 }
 .navContainer .left .navItem {
   position: relative;

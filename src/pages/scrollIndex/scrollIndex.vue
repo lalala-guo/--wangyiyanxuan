@@ -41,7 +41,14 @@
                 </div>
             </div>
 
-
+            <!-- 新人专享礼 -->
+            <div class="freshManContainner">
+                <div class="header"></div>
+                <div class="contentContainer">
+                    <div class="left"></div>
+                    <div class="right"></div>
+                </div>
+            </div>
 
 
 
