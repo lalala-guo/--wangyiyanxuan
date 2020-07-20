@@ -55,6 +55,7 @@ export default {
   },
   async mounted() {
     this.init();
+    this.getIndexCateData()
     this.getIndexData()
   },
   beforeDestroy() {
@@ -62,11 +63,13 @@ export default {
   },
   computed:{
     ...mapState({
-      navList: state => state.index.indexData
+      navList: state => state.index.indexCateData,
+      indexData: state => state.index.indexData
     })
   },
   methods: {
     ...mapActions({
+      getIndexCateData: "getIndexCateData",
       getIndexData: "getIndexData"
     }),
     changeNavId(navIndex){
