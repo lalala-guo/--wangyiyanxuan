@@ -43,15 +43,68 @@
 
             <!-- 新人专享礼 -->
             <div class="freshManContainner">
-                <div class="header"></div>
+                <div class="freshHeader">
+                    新人专享礼
+                </div>
                 <div class="contentContainer">
-                    <div class="left"></div>
-                    <div class="right"></div>
+                    <div class="contentLeft">
+                        <div class="name">新人专享礼包</div>
+                        <div class="imgContainer">
+                            <img class="leftImg" src="../../../public/images/freshMan.png" alt="">
+                            <div class="more"></div>
+                        </div>
+                        
+                    </div>
+                    <div class="contentRight">
+                        <!-- v-for="(item, index) in indexData.indexActivityModule" :key="index" -->
+                        <div class="topRight" >
+                            <div class="titleContainer" >
+                                <div class="title">{{indexData.indexActivityModule[0].title}}</div>
+                                <div class="content">{{indexData.indexActivityModule[0].subTitle}}</div>
+                            </div>
+                            <div class="imgwrap">
+                                <img class="rightImg" :src="indexData.indexActivityModule[0].showPicUrl" alt="">
+                            </div>
+                        </div>
+                        <div class="bottomRight">
+                            <div class="titleContainer">
+                                <div class="title">{{indexData.indexActivityModule[1].title}}</div>
+                                <div class="content">{{indexData.indexActivityModule[1].tag}}</div>
+                            </div>
+                            <div class="imgwrap">
+                                <img class="rightImg" :src="indexData.indexActivityModule[0].showPicUrl" alt="">
+                                <div class="priceContainer">
+                                    <div class="line1">￥1</div>
+                                    <div class="line2">￥13.9</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-
-
+            <!-- 类目热销榜 -->
+            <!-- <div class="hotListContainer">
+                <div class="hotHeader">类目热销榜</div>
+                <div class="hotContainer">
+                    <div class="hot1">
+                        <div class="hotLeft">
+                            <div class="hotTitle">热销榜</div>
+                            <img class="hotImg" src="" alt="">
+                        </div>
+                        <div class="hotRight">
+                            <div class="hotTitle">好评榜</div>
+                            <img class="hotImg" src="" alt="">
+                        </div>
+                    </div>
+                    <div class="hot2">
+                        <div class="hotItem">
+                            <div class="hotTitle">居家生活榜</div>
+                            <img class="hotImg" src="" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div> -->
 
 
             <div class="test"></div>
@@ -91,7 +144,6 @@ export default {
     .containerWrap
         width 750px
         height 100%
-        // background white
         text-align center
         .centerContainer
             width 100%
@@ -102,14 +154,9 @@ export default {
                 width 100%
                 height 72px
                 display flex
-                box-sizing border-box
                 justify-content space-between
                 align-items center
                 .centerItem
-                    // width 228px
-                    // height 36px
-                    // margin 0 27px
-                    // flex 1
                     white-space nowrap
                     img 
                         width 32px
@@ -117,7 +164,6 @@ export default {
                         vertical-align middle
                     span 
                         font-size 24px
-                        color #333
                         margin-left 8px
                         line-height 32px
                         display inline-block
@@ -129,43 +175,34 @@ export default {
             .itemContainer
                 width 750px
                 overflow hidden
-                // float left
-                // display flex
-                // white-space pre-wrap
                 .listItem
                     display inline
-                    // display flex
-                    // flex-direction column
                     align-items center
-                    // display: block;
                     width: 110px;
                     height: 156px;
                     float: left;
                     margin: 10px 20px 9px
-                    // margin: .13333rem .26667rem 0;
                     img 
                         width 110px
                         height 110px
                     span
                         margin-top 5px
                         text-align center
-                        font-size .32rem
-                        line-height .48rem
+                        font-size 24px
+                        line-height 36px
                         white-space nowrap
         .newBuyContainer
             width 100%
             background rgb(230, 73, 4)
             height 547.5px
-            // background pink
             .topContainer
                 height 4.28444rem
-                background url('https://yanxuan.nosdn.127.net/d9b021de430394e9b274bf0455b53120.gif?imageView&quality=75')  0% 0% / 100% 100% 
+                background url('../../../public/images/xinren0yuan.gif')  0% 0% / 100% 100% 
             .bottomContainer
                 display flex
                 align-items center
                 justify-content space-between
                 margin 20px
-                box-sizing border-box
                 height 186px
                 
                 .left 
@@ -176,12 +213,164 @@ export default {
                     width 351px
                     height 100%
                     background  url('../../../public/images/newBuy2.webp') 0% 0% / 100% 100%
+        .freshManContainner
+            position relative
+            margin 20px 0
+            background white
+            padding-bottom 30px
+            .freshHeader
+                padding 0 30px 
+                font-family PingFangSC-Regular
+                width 100%
+                height 90px
+                line-height 90px
+                text-align center
+                background white
+                font-size 32px
+                &:before 
+                    position absolute
+                    left 250px
+                    top 45px
+                    content ''
+                    display block
+                    width 24px
+                    height 3px
+                    background #333
+                &:after
+                    position absolute
+                    right 250px
+                    top 45px
+                    content ''
+                    display block
+                    width 24px
+                    height 3px
+                    background #333
+            .contentContainer
+                display flex
+                align-items center
+                justify-content space-between
+                padding 0 30px
+                width 100%
+                height 434px
+                // background pink
+                .contentLeft
+                    width 343px
+                    height 100%
+                    background #F9E9CF
+                    .name
+                        text-align left 
+                        padding 30px 0 0 30px
+                        font-size 32px
+                    .imgContainer
+                        position relative
+                        width 258px
+                        height 257px
+                        margin 37px auto
+                        .leftImg
+                            width 258px
+                            height 257px
+                        .more
+                            width 30px
+                            height 20px
+                            position absolute
+                            bottom 18px
+                            right 65px
+                            background-image url('../../../public/images/more.webp')
+                            background-size 100% 100%
+                .contentRight
+                    width 343px
+                    height 100%
+                    .topRight
+                        position relative
+                        padding 20px 0 0 30px
+                        width 100%
+                        height 215px
+                        background #FBE2D3
+                        margin-bottom 4px
+                        .imgwrap
+                            position absolute
+                            top 15px
+                            right 0
+                            width 200px
+                            height 200px
+                            .rightImg
+                                width 200px
+                                height 200px
+                        .titleContainer
+                            text-align left 
+                            .title
+                                font-size 32px
+                            .content 
+                                color #7F7F7F   
+                    .bottomRight
+                        position relative
+                        padding 20px 0 0 30px
+                        width 100%
+                        height 215px
+                        background #FFECC2
+                        .imgwrap
+                            position absolute
+                            top 15px
+                            right 0
+                            width 200px
+                            height 200px
+                            .rightImg
+                                width 200px
+                                height 200px
+                        .titleContainer
+                            text-align left 
+                            .title
+                                font-size 32px 
+                            .content 
+                                // width 121px
+                                white-space nowrap 
+                                color white
+                                background #CBB693
+                                padding 0 10px
+                                display inline-block
+                        .priceContainer
+                            position absolute
+                            top 0
+                            right 30px
+                            width 80px
+                            height 80px
+                            border-radius 50%
+                            background #F59524
+                            opacity .8
+                            padding-top 10px
+                            .line1
+                                color white
+                                font-size 24px
+                            .line2
+                                color white
+                                font-size 18px
+                                margin-top -.09333rem
+                                text-decoration-line line-through
+        // .hotListContainer
+        //     background white
+        //     .hotHeader
+        //         width 100%
+        //         height 100px
+        //         line-height 100px
+        //         padding 0 30px
+        //         font-size 32px
+        //         font-family PingFangSC-Regular
+        //         text-align left 
+        //     .hotContainer
+        //         padding 0 20px 20px 30px
+        //         display flex
+        //         .hot1
+        //             width 340px
+        //             height 200px
+        //             background pink
 
-
-
-
-
-
+        //         .hot2
+        //             width 340px
+        //             height 200px
+        //             background yellow
+        
+        
+        
         .test
             height 1000px
 </style>

@@ -2,7 +2,7 @@
         <!-- Swiper -->
             <div class="swiper-container" autoplay>
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
+                    <!-- <div class="swiper-slide">
                         <img src="../../../public/images/01.webp" />
                     </div>
                     <div class="swiper-slide">
@@ -25,10 +25,49 @@
                     </div>
                     <div class="swiper-slide">
                         <img src="../../../public/images/08.webp" />
-                    </div>
+                    </div> -->
+                    <van-swipe class="swiper-wrapper" @change="onChange" :autoplay="3000" indicator indicator-color="white">
+                        <van-swipe-item class="swiper-slide">
+                            <img src="../../../public/images/01.webp" />
+                        </van-swipe-item >
+                        <van-swipe-item class="swiper-slide">
+                            <img src="../../../public/images/02.webp" />
+                        </van-swipe-item>
+                        <van-swipe-item class="swiper-slide">
+                            <img src="../../../public/images/03.webp" />
+                        </van-swipe-item>
+                        <van-swipe-item class="swiper-slide">
+                            <img src="../../../public/images/04.webp" />
+                        </van-swipe-item>
+                        <van-swipe-item class="swiper-slide">
+                            <img src="../../../public/images/05.webp" />
+                        </van-swipe-item>
+                        <van-swipe-item class="swiper-slide">
+                            <img src="../../../public/images/06.webp" />
+                        </van-swipe-item>
+                        <van-swipe-item class="swiper-slide">
+                            <img src="../../../public/images/07.webp" />
+                        </van-swipe-item>
+                        <van-swipe-item class="swiper-slide" >
+                            <img src="../../../public/images/08.webp" />
+                        </van-swipe-item>
+                        
+                        <template #indicator>
+                            <div class="custom-indicator">
+                                <span class="swiper-pagination-bottom" @click="clickChange(0)" :class="{active: current === 0}"></span>
+                                <span class="swiper-pagination-bottom" @click="clickChange(1)" :class="{active: current === 1}"></span>
+                                <span class="swiper-pagination-bottom" @click="clickChange(2)" :class="{active: current === 2}"></span>
+                                <span class="swiper-pagination-bottom" @click="clickChange(3)" :class="{active: current === 3}"></span>
+                                <span class="swiper-pagination-bottom" @click="clickChange(4)" :class="{active: current === 4}"></span>
+                                <span class="swiper-pagination-bottom" @click="clickChange(5)" :class="{active: current === 5}"></span>
+                                <span class="swiper-pagination-bottom" @click="clickChange(6)" :class="{active: current === 6}"></span>
+                                <span class="swiper-pagination-bottom" @click="clickChange(7)" :class="{active: current === 7}"></span>
+                            </div>
+                        </template>
+                    </van-swipe>
                 </div>
 
-                <div class="swiper-pagination">
+                <!-- <div class="swiper-pagination">
                     <span class="swiper-pagination-bottom active" ></span>
                     <span class="swiper-pagination-bottom"></span>
                     <span class="swiper-pagination-bottom"></span>
@@ -37,15 +76,10 @@
                     <span class="swiper-pagination-bottom"></span>
                     <span class="swiper-pagination-bottom"></span>
                     <span class="swiper-pagination-bottom"></span>
-                </div>
+                </div> -->
             </div>
             
-            <!-- <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-                <van-swipe-item>1</van-swipe-item>
-                <van-swipe-item>2</van-swipe-item>
-                <van-swipe-item>3</van-swipe-item>
-                <van-swipe-item>4</van-swipe-item>
-            </van-swipe> -->
+            
 
 </template>
 
@@ -54,6 +88,20 @@ import '../../package/swiper-bundle.min.css'
 import '../../package/swiper-bundle.min.js'
 import Swiper from 'swiper'
 export default {
+    data() {
+    return {
+      current: 0,
+    };
+  },
+  methods: {
+    onChange(index) {
+      this.current = index;
+    },
+    clickChange(index){
+        // console.log(index);
+        // this.onChange(index)
+    }
+  },
     mounted(){
         var swiper = new Swiper('.swiper-container', {
             // slidesPerView: 1,
@@ -79,14 +127,6 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-
-//  .my-swipe .van-swipe-item 
-//     color #fff
-//     font-size 20px
-//     line-height 150px
-//     text-align center
-//     background-color #39a9ed
-
     .swiper-container 
             width 100%
             height 296px
@@ -114,7 +154,7 @@ export default {
                     img
                         width 100%
                         height auto
-            .swiper-pagination
+            .custom-indicator
                 position absolute
                 bottom 30px
                 left 50%
