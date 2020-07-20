@@ -55,7 +55,7 @@
                         </div>
                         
                     </div>
-                    <div class="contentRight">
+                    <div class="contentRight" v-if="indexData.indexActivityModule">
                         <!-- v-for="(item, index) in indexData.indexActivityModule" :key="index" -->
                         <div class="topRight" >
                             <div class="titleContainer" >
@@ -84,27 +84,27 @@
             </div>
 
             <!-- 类目热销榜 -->
-            <!-- <div class="hotListContainer">
-                <div class="hotHeader">类目热销榜</div>
+            <div class="hotListContainer" v-if="indexData.categoryHotSellModule">
+                <div class="hotHeader">{{indexData.categoryHotSellModule.title}}</div>
                 <div class="hotContainer">
                     <div class="hot1">
                         <div class="hotLeft">
-                            <div class="hotTitle">热销榜</div>
-                            <img class="hotImg" src="" alt="">
+                            <div class="hotName">{{indexData.categoryHotSellModule.categoryList[0].categoryName}}</div>
+                            <img class="hotImg" :src="indexData.categoryHotSellModule.categoryList[0].showPicUrl" alt="">
                         </div>
                         <div class="hotRight">
-                            <div class="hotTitle">好评榜</div>
-                            <img class="hotImg" src="" alt="">
+                            <div class="hotName">{{indexData.categoryHotSellModule.categoryList[1].categoryName}}</div>
+                            <img class="hotImg" :src="indexData.categoryHotSellModule.categoryList[1].showPicUrl" alt="">
                         </div>
                     </div>
                     <div class="hot2">
-                        <div class="hotItem">
-                            <div class="hotTitle">居家生活榜</div>
-                            <img class="hotImg" src="" alt="">
+                        <div class="hotItem" v-for="(item,index) in indexData.categoryHotSellModule.categoryList.slice(2,10)" :key="index">
+                            <div class="hotTitle">{{item.categoryName}}</div>
+                            <img class="itemImg" :src="item.showPicUrl" alt="">
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
 
 
             <div class="test"></div>
@@ -346,31 +346,96 @@ export default {
                                 font-size 18px
                                 margin-top -.09333rem
                                 text-decoration-line line-through
-        // .hotListContainer
-        //     background white
-        //     .hotHeader
-        //         width 100%
-        //         height 100px
-        //         line-height 100px
-        //         padding 0 30px
-        //         font-size 32px
-        //         font-family PingFangSC-Regular
-        //         text-align left 
-        //     .hotContainer
-        //         padding 0 20px 20px 30px
-        //         display flex
-        //         .hot1
-        //             width 340px
-        //             height 200px
-        //             background pink
-
-        //         .hot2
-        //             width 340px
-        //             height 200px
-        //             background yellow
-        
-        
-        
+        .hotListContainer
+            background white
+            .hotHeader
+                width 100%
+                height 100px
+                line-height 100px
+                padding 0 30px
+                font-size 32px
+                font-family PingFangSC-Regular
+                text-align left 
+            .hotContainer
+                width 100%
+                height 610px
+                padding 0 20px 20px 30px
+                .hot1
+                    display flex
+                    .hotLeft 
+                        position relative 
+                        margin 0 10px 10px 0
+                        width 340px
+                        height 200px
+                        background #F9F3E4
+                        .hotName
+                            position relative
+                            font-size 28px
+                            color #333
+                            padding-left 24px
+                            margin-top 66px
+                            text-align left
+                            &:after
+                                position absolute
+                                left 30px
+                                bottom -16px
+                                content ""
+                                display block
+                                width 48px
+                                height 4px
+                                background #333
+                        .hotImg
+                            position absolute
+                            top 0 
+                            right 0
+                            width 200px
+                            height 200px
+                    .hotRight
+                        position relative 
+                        width 340px
+                        height 200px
+                        background #EBEFF6
+                        .hotName
+                            position relative
+                            font-size 28px
+                            color #333
+                            padding-left 24px
+                            margin-top 66px
+                            text-align left
+                            &:after
+                                position absolute
+                                left 30px
+                                bottom -16px
+                                content ""
+                                display block
+                                width 48px
+                                height 4px
+                                background #333
+                        .hotImg
+                            position absolute
+                            top 0 
+                            right 0
+                            width 200px
+                            height 200px
+                .hot2
+                    // display flex 
+                    // white-space pre-wrap
+                    .hotItem
+                        float left
+                        width 165px
+                        height 180px
+                        background #F5F5F5
+                        border-radius 4px
+                        margin 0 10px 10px 0
+                        overflow hidden
+                        .hotTitle
+                            font-size 24px
+                            color #333
+                            font-family PingFangSC-Medium
+                            margin-top 10px
+                        .itemImg
+                            width 120px
+                            height 120px
         .test
             height 1000px
 </style>
