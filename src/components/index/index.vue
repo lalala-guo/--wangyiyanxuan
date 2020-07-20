@@ -8,11 +8,12 @@
           <i class="icon"></i>
           <span>搜索商品, 共34087款好物</span>
         </div>
-        <!-- <button class="btn">登录</button>   hairline -->
-        <van-button class="btn" plain type="danger">登录</van-button>
+        <!-- <button class="btn">登录</button>  plain  hairline -->
+        <van-button class="btn" hairline type="danger">登录</van-button>
       </div>
       <!-- 导航  -->
       <div class="navContainer" ref="scroll">
+        <!-- 左侧 -->
         <div class="left">
           <div class="navItem" @click="changeNavId(0)" :class="{active: navIndex === 0}">
             <span>推荐</span>
@@ -21,7 +22,7 @@
             <span>{{item.name}}</span>
           </div>
         </div>
-      <!-- 右侧 -->
+        <!-- 右侧 -->
         <div class="right">
           <div class="linear"></div>
           <div class="xiala">
@@ -56,21 +57,20 @@ export default {
   async mounted() {
     this.init();
     this.getIndexCateData()
-    this.getIndexData()
   },
   beforeDestroy() {
     this.bs.destroy();
   },
   computed:{
     ...mapState({
-      navList: state => state.index.indexCateData,
-      indexData: state => state.index.indexData
+      navList: state => state.index.indexCateData
+      
     })
   },
   methods: {
     ...mapActions({
-      getIndexCateData: "getIndexCateData",
-      getIndexData: "getIndexData"
+      getIndexCateData: "getIndexCateData"
+      
     }),
     changeNavId(navIndex){
       console.log(navIndex);
@@ -235,6 +235,6 @@ export default {
 }
 
 .container {
-  height: calc(100vh - 148px);
+  /* height: calc(100vh - 148px); */
 }
 </style>
