@@ -4,7 +4,7 @@
       <!-- 头部 -->
       <div class="header">
         <a href="/index" src="../../../public/images/logo.webp"></a>
-        <div class="inputContainer">
+        <div class="inputContainer" @click="toSousuo">
           <i class="icon"></i>
           <span>搜索商品, 共34087款好物</span>
         </div>
@@ -86,6 +86,10 @@ export default {
       this.navIndex = navIndex
       this.navId = id
     },
+    toSousuo(){
+      this.$router.push({path:'/sousuo'})
+    },
+
 
     init() {
       this.bs = new BScroll(this.$refs.scroll, {

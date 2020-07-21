@@ -6,6 +6,7 @@ import Category from '../components/category/category.vue'
 import Buy from '../components/buy/buy.vue'
 import Cart from '../components/cart/cart.vue'
 import Personal from '../components/personal/personal.vue'
+import Sousuo from '../components/sousuo/sousuo.vue'
 
 import { Button } from 'vant';
 
@@ -21,6 +22,10 @@ const router = new VueRouter({
         {
             path: '/',
             redirect: '/index' 
+        },
+        {
+            path: '/sousuo',
+            component: Sousuo
         },
         {
             path: '/index',

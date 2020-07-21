@@ -2,7 +2,7 @@
   <div class="cateGaryContainer">
     <!-- 头部搜索 -->
     <div class="cateGaryHeader">
-        <div class="headerContainer">
+        <div class="headerContainer"  @click="toSousuo">
           <i class="../../../public/images/sousuo.webp"></i>
           <span>搜索商品, 共34087款好物</span>
         </div>
@@ -11,9 +11,15 @@
    <div class="scrollContainer">
       <div class="CateListContainer" ref="scroll" >
         <div class="leftCateList" >
-          <div class="itemCate" :class="{active: activeIndex===index}" @click="changeActiveIndex(index,item.id)" v-for="(item, index) in cateNavData" :key="index">
+          <div class="itemCate" :class="{active: activeIndex===index}" @click="changeActiveIndex(index,item.id)" v-for="(item, index) in cateNavData.slice(4, 12)" :key="index">
             {{item.name}}
           </div>
+          <!-- <div class="itemCate">推荐</div>
+          <div class="itemCate">推荐</div>
+          <div class="itemCate">推荐</div>
+          <div class="itemCate">推荐</div>
+          <div class="itemCate">推荐</div>
+          <div class="itemCate">推荐</div> -->
         </div>
       </div>
       <div class="CateListContainer" ref="scroll">
@@ -33,6 +39,7 @@
                   </div>
               </div>
             </div>
+            <!-- v-else -->
             <div class="cateContainertwo" v-else>
               <div class="cateTop">
                   <img src="../../../public/images/banner.webp" alt="">
@@ -41,7 +48,7 @@
                   <div class="cateListContainer" v-if=" cateGoryList">
                       <div class="lists" >
                         <div class="title">口碑好物</div>
-                        <div class="cateItem" v-for="(item, index) in cateGoryList.subCateList" :key="index">
+                        <div class="cateItem" v-for="(item, index) in cateGoryList.subCateList.slice(0,9)" :key="index">
                           <div class="imgContainer">
                             <img :src="item.wapBannerUrl" alt="">
                           </div>
@@ -64,7 +71,6 @@ import {mapState, mapActions, mapMutations,mapGetters} from 'vuex'
 export default {
   data(){
     return {
-      active: 2,
       activeIndex: 0,
       cateId:11,  // 分类id
     }
@@ -73,9 +79,12 @@ export default {
     CateGoryOne
   },
   async mounted(){
-    this.init();
+    this.init()
     this.getCateData()
     this.getCateList()
+  },
+  beforeDestroy() {
+    this.bs.destroy()
   },
   computed:{
     ...mapState({
@@ -86,10 +95,6 @@ export default {
       return this.cateLists.find(item => item.id === this.cateId)
     }
   },
-  beforeDestroy() {
-    this.bs.destroy();
-  },
-
   methods:{
     changeActiveIndex(index, id){
       this.activeIndex = index
@@ -100,25 +105,32 @@ export default {
       getCateData: 'getCateData',
       getCateList: 'getCateList'
     }),
-    init() {
-      this.bs = new BScroll(this.$refs.scroll, {
-        mouseWheel: true,
-        disableMouse:false,
-        disableTouch: false,
-        resizePolling: 0,
-        click: true,
-        scrollY: true,
-        probeType: 3 // listening scroll hook
-      });
-      this._registerHooks(["scroll", "scrollEnd"], pos => {
-        //   console.log('done')
-      });
+    toSousuo(){
+      this.$router.push({path:'/sousuo' })
     },
-    _registerHooks(hookNames, handler) {
-      hookNames.forEach(name => {
-        this.bs.on(name, handler);
-      });
-    }
+
+    init() {
+            this.bs = new BScroll(this.$refs.scroll, {
+                mouseWheel: true,
+                disableMouse:false,
+                disableTouch: false,
+                resizePolling: 0,
+                scrollY: true,
+                click: true,
+                probeType: 3 // listening scroll hook
+            })
+            this._registerHooks(['scroll', 'scrollEnd'], (pos) => {
+                console.log('done')
+            })
+        },
+        clickHandler (item) {
+            alert(item)
+        },
+        _registerHooks(hookNames, handler) {
+            hookNames.forEach((name) => {
+            this.bs.on(name, handler)
+            })
+        }
   }
 }
 </script>
@@ -127,6 +139,7 @@ export default {
 .cateGaryContainer
   position relative
   padding-top 88px
+  background white
   .cateGaryHeader
     z-index 2
     width 100%
@@ -136,17 +149,7 @@ export default {
     position absolute
     top 0
     left 0
-    .headerContainer
-      width 690px
-      height 56px
-      line-height 56px
-      margin-top 16px
-      background #ededed
-      display flex
-      align-items center
-      justify-content center
-      border-radius 4px
-      &:after
+    &:after
         content ""
         position absolute
         background-color #d9d9d9
@@ -156,6 +159,16 @@ export default {
         -webkit-transform-origin 50% 100% 0
         transform-origin 50% 100% 0
         bottom 0
+    .headerContainer
+      // width 690px
+      height 56px
+      line-height 56px
+      margin-top 16px
+      background #ededed
+      display flex
+      align-items center
+      justify-content center
+      border-radius 4px
       span 
         color #666
         font-size 28px
@@ -169,15 +182,12 @@ export default {
   .scrollContainer
     display flex
     .CateListContainer
+      height calc(100vh - 88px)
       display flex
-      // height 1197px
-      width 100%
-      // margin-bottom 98px
-      // margin-top 88px
+      // height 100%
       .leftCateList
         padding 40px 0 0 0 
         width 162px
-        // height 100%
         border-right 1px solid #d9d9d9
         .itemCate
           position relative
@@ -280,27 +290,25 @@ export default {
                   width 144px
                   height 216px
                   margin-left 34px
-                  &:nth-of-type(1)
+                  &:nth-of-type(2)
                       margin 0
-                  &:nth-of-type(4)
+                  &:nth-of-type(5)
                       margin 0
-                  &:nth-of-type(7)
+                  &:nth-of-type(8)
                       margin 0
-                  &:nth-of-type(10)
+                  &:nth-of-type(11)
                       margin 0
-                  &:nth-of-type(13)
+                  &:nth-of-type(14)
                       margin 0
-                  &:nth-of-type(16)
+                  &:nth-of-type(17)
                       margin 0
-                  &:nth-of-type(19)
+                  &:nth-of-type(20)
                       margin 0
-                  &:nth-of-type(22)
+                  &:nth-of-type(23)
                       margin 0
-                  &:nth-of-type(25)
+                  &:nth-of-type(26)
                       margin 0
-                  &:nth-of-type(28)
-                      margin 0
-                  &:nth-of-type(31)
+                  &:nth-of-type(29)
                       margin 0
                   &:nth-of-type(34)
                       margin 0
@@ -319,6 +327,24 @@ export default {
                   &:nth-of-type(55)
                       margin 0
                   &:nth-of-type(58)
+                      margin 0
+                  &:nth-of-type(61)
+                      margin 0
+                  &:nth-of-type(64)
+                      margin 0
+                  &:nth-of-type(67)
+                      margin 0
+                  &:nth-of-type(71)
+                      margin 0
+                  &:nth-of-type(74)
+                      margin 0
+                  &:nth-of-type(77)
+                      margin 0
+                  &:nth-of-type(80)
+                      margin 0
+                  &:nth-of-type(83)
+                      margin 0
+                  &:nth-of-type(86)
                       margin 0
                   .imgContainer
                       width 144px
