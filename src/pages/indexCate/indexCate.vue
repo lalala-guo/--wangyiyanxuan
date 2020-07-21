@@ -61,7 +61,7 @@ export default {
                 probeType: 3 // listening scroll hook
             })
             this._registerHooks(['scroll', 'scrollEnd'], (pos) => {
-                console.log('done')
+                // console.log('done')
             })
         },
         clickHandler (item) {

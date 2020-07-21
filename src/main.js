@@ -13,7 +13,6 @@ Vue.use(DropdownMenu);
 Vue.use(DropdownItem);
 Vue.use(Icon);
 
-
 new Vue({
 //   el: "#root",
   render: (h) => h(App),

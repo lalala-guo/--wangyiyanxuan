@@ -61,7 +61,7 @@ export default {
     IndexCate
   },
   async mounted() {
-    this.init();
+    await this.init();
     await this.getIndexCateData()
   },
   beforeDestroy() {

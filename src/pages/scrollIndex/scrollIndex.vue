@@ -209,9 +209,9 @@ export default {
     components:{
         Swiper
     },
-    mounted(){
-        this.init()
-        this.getIndexData()
+    async mounted(){
+       await this.init()
+       await this.getIndexData()
     },
     beforeDestroy() {
       this.bs.destroy()
@@ -236,7 +236,7 @@ export default {
                 probeType: 3 // listening scroll hook
             })
             this._registerHooks(['scroll', 'scrollEnd'], (pos) => {
-                console.log('done')
+                // console.log('done')
             })
         },
         clickHandler (item) {
