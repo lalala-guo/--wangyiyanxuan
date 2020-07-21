@@ -24,6 +24,14 @@ module.exports = {
           pathRewrite: {  
             '^/api': ''
           }
+        },
+        '/online': {
+          target: 'https://m.you.163.com/',
+          changeOrigin: true, // 支持跨域
+          //路径重写
+          pathRewrite: {  
+            '^/online': ''
+          }
         }
       }
     }

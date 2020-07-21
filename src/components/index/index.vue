@@ -46,8 +46,7 @@
       <IndexCate v-else :getindexDataList = 'getindexDataList'></IndexCate>
     </div>
 
-
-    <van-overlay :show="show"  @click="show = false" class="vanContent">
+    <van-overlay duration=0 :show="show"  @click="show = false" class="vanContent">
         <div class="wrapper" @click.stop>
           <div class="block">
             <div class="header positions">
@@ -161,7 +160,7 @@ export default {
 };
 </script>
 
-<style >
+<style scoped>
 .indexContainer{
   /* position: relative; */
   position: flex;

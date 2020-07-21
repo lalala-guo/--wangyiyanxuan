@@ -70,6 +70,9 @@ export default {
 </script>
 
 <style >
+    html,body{
+        background: #eee;
+    }
     *{
         margin: 0;
         padding: 0;
