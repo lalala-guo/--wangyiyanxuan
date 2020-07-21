@@ -5,12 +5,12 @@ import store from './store/index.js'
 import router from './router/index'
 
 // swiper
-import { Swipe, SwipeItem, CountDown, DropdownMenu, DropdownItem, Icon } from 'vant';
+import { Swipe, SwipeItem, CountDown, Icon, Popup, Overlay  } from 'vant';
+Vue.use(Popup);
+Vue.use(Overlay);
 Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(CountDown);
-Vue.use(DropdownMenu);
-Vue.use(DropdownItem);
 Vue.use(Icon);
 
 new Vue({

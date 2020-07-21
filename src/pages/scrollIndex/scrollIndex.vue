@@ -210,8 +210,8 @@ export default {
         Swiper
     },
     async mounted(){
-       await this.init()
-       await this.getIndexData()
+        await this.init()
+        await this.getIndexData()
     },
     beforeDestroy() {
       this.bs.destroy()
