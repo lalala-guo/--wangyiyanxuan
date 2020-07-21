@@ -1,5 +1,5 @@
 <template>
-  <div class="scrollIndexContainer">
+  <div class="scrollIndexContainer" ref="scroll" >
         <div class="containerWrap">
             <!-- Swiper -->
             <Swiper></Swiper>
@@ -111,7 +111,7 @@
                 <div class="timeHeader">
                     <div class="timeLeft" v-if="indexData.flashSaleModule">
                         <div class="left">限时购</div>
-                        <van-count-down class="time" :time="indexData.flashSaleModule.remainTime">
+                        <van-count-down class="time" :time="indexData.flashSaleModule.nextStartTime">
                             <!-- v-slot="timeData"  format="HH:mm:ss" -->
                             <template v-slot="timeData" >
                                 <span class="block">{{ timeData.hours }}</span>
@@ -197,19 +197,24 @@
 </template>
 
 <script>
+import BScroll from '@better-scroll/core'
 import Swiper from '../swiper/swiper.vue'
 import {mapState, mapActions} from 'vuex'
 export default {
     data() {
-    return {
-    //   time:  1581904800000,
-    };
-  },
+        return {
+        
+        };
+    },
     components:{
         Swiper
     },
     mounted(){
+        this.init()
         this.getIndexData()
+    },
+    beforeDestroy() {
+      this.bs.destroy()
     },
     computed:{
         ...mapState({
@@ -219,7 +224,30 @@ export default {
     methods: {
         ...mapActions({
             getIndexData: "getIndexData"
-        })
+        }),
+        init() {
+            this.bs = new BScroll(this.$refs.scroll, {
+                mouseWheel: true,
+                disableMouse:false,
+                disableTouch: false,
+                resizePolling: 0,
+                scrollY: true,
+                click: true,
+                probeType: 3 // listening scroll hook
+            })
+            this._registerHooks(['scroll', 'scrollEnd'], (pos) => {
+                console.log('done')
+            })
+        },
+        clickHandler (item) {
+            alert(item)
+        },
+        _registerHooks(hookNames, handler) {
+            hookNames.forEach((name) => {
+            this.bs.on(name, handler)
+            })
+        }
+        
     }
 
 }
@@ -228,12 +256,14 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus" scoped>
 .scrollIndexContainer
     width 100%
-    height 100%
+    height calc(100vh - 148px)
+    overflow hidden
+    // height 100%
     background #eee
     .containerWrap
-        color: #333;
+        margin 0 auto
+        color #333
         width 750px
-        height 100%
         text-align center
         .centerContainer
             width 100%

@@ -15,10 +15,10 @@
       <div class="navContainer" ref="scroll">
         <!-- 左侧 -->
         <div class="left">
-          <div class="navItem" @click="changeNavId(0)" :class="{active: navIndex === 0}">
+          <div class="navItem" @click="changeNavId(0,0)" :class="{active: navIndex === 0}">
             <span>推荐</span>
           </div>
-          <div class="navItem" @click="changeNavId(index+1)" :class="{active: navIndex === (index+1)}" v-for="(item, index) in navList" :key="index">
+          <div class="navItem" @click="changeNavId(index+1,item.id)" :class="{active: navIndex === (index+1)}" v-for="(item, index) in navList" :key="index">
             <span>{{item.name}}</span>
           </div>
         </div>
@@ -35,14 +35,16 @@
     </div>
 
     <!-- scroll -->
-    <div class="container">
-      <ScroolIndex></ScroolIndex>
+    <div class="container" >
+      <ScroolIndex v-if="navIndex===0"></ScroolIndex>
+      <IndexCate v-else :getindexDataList = 'getindexDataList'></IndexCate>
     </div>
   </div>
 </template>
 
 <script>
 import ScroolIndex from "../../pages/scrollIndex/scrollIndex.vue";
+import IndexCate from "../../pages/indexCate/indexCate.vue";
 
 import BScroll from "@better-scroll/core";
 import {mapState, mapMutations, mapActions, mapGetters} from 'vuex'
@@ -51,14 +53,15 @@ export default {
     return {
       active: 2,
       navIndex: 0,  // 点击的下标
+      navId:'',  // 导航 id
     };
   },
   components: {
-    ScroolIndex
+    ScroolIndex,
+    IndexCate
   },
   async mounted() {
     this.init();
-
     await this.getIndexCateData()
   },
   beforeDestroy() {
@@ -67,17 +70,21 @@ export default {
   computed:{
     ...mapState({
       navList: state => state.index.indexCateData
-      
-    })
+    }),
+    getindexDataList(){
+      return this.navList.find(item => item.id === this.navId)
+    }
+    
   },
   methods: {
     ...mapActions({
       getIndexCateData: "getIndexCateData"
       
     }),
-    changeNavId(navIndex){
-      console.log(navIndex);
+    changeNavId(navIndex,id){
+      // console.log(navIndex,id);
       this.navIndex = navIndex
+      this.navId = id
     },
 
     init() {
@@ -104,11 +111,15 @@ export default {
 </script>
 
 <style >
-/* .indexContainer{
-  position: relative;
+.indexContainer{
+  /* position: relative; */
+  position: flex;
+  top: 0;
+  left: 0; 
   overflow: hidden;
-} */
+}
 .headerContainer{
+   position: relative;
     /* z-index: 99; */
     /* position: flex;
     top: 0;
@@ -249,6 +260,7 @@ export default {
 
 
 .container {
+  /* margin: 0 auto; */
   /* height: calc(100vh - 148px); */
   /* margin-top: 148px; */
 }

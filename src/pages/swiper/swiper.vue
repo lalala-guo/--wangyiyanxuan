@@ -66,7 +66,6 @@
                         </template>
                     </van-swipe>
                 </div>
-
                 <!-- <div class="swiper-pagination">
                     <span class="swiper-pagination-bottom active" ></span>
                     <span class="swiper-pagination-bottom"></span>
@@ -78,9 +77,6 @@
                     <span class="swiper-pagination-bottom"></span>
                 </div> -->
             </div>
-            
-            
-
 </template>
 
 <script>
@@ -98,24 +94,26 @@ export default {
       this.current = index;
     },
     clickChange(index){
-        // console.log(index);
-        // this.onChange(index)
+        
+        this.onChange(index)
+
+        let num = -index-this.current
+        let width = (num * 325)
+        let goAway = 'translateX(' + width + 'px)'
+        let container = document.querySelector('.van-swipe__track')
+        container.style.transform = goAway
+        this.onChange(index)
     }
   },
     mounted(){
         var swiper = new Swiper('.swiper-container', {
-            // slidesPerView: 1,
-            // spaceBetween: 30,
-            // centeredSlides: true,
             autoplay: {
                 delay: 2500,
-                // disableOnInteraction: false,
             },
             loop: true,
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
-                // type: 'bullets',
             },
             navigation: {
                 nextEl: '.swiper-button-next',
