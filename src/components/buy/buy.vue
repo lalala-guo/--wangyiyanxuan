@@ -43,6 +43,7 @@
         </div>
       </div>
     </div>
+    <Water />
   </div>
 </template>
 
@@ -51,6 +52,7 @@ import axios from 'axios'
 import '../../package/swiper-bundle.min.css'
 import '../../package/swiper-bundle.min.js'
 import Swiper from 'swiper'
+import Water from './waterfall.vue'
 export default {
   data(){
     return{
@@ -58,8 +60,10 @@ export default {
       activeId: 0,
     }
   },
+  components:{
+    Water
+  },
   async mounted(){
-    
     let result = await axios('/online/topic/v1/know/navWap.json')
     // console.log(result);
     this.swiperList = result.data.data
@@ -137,6 +141,7 @@ export default {
 .swiperCenterContainer{
   width: 375*2px;
   height: 342.5*2px;
+  margin-bottom: 30px;
 }
 .bLogo{
   width: 65*2px;

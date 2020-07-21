@@ -4,8 +4,10 @@ import App from "./App";
 import store from './store/index.js'
 import router from './router/index'
 
-// swiper
+
 import { Swipe, SwipeItem, CountDown, Icon, Popup, Overlay  } from 'vant';
+import waterfall from 'vue-waterfall2'
+Vue.use(waterfall)
 Vue.use(Popup);
 Vue.use(Overlay);
 Vue.use(Swipe);
