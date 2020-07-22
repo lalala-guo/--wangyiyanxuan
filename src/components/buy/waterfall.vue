@@ -2,20 +2,22 @@
   <div class="container-water-fall">
     <waterfall :col='col' :width="itemWidth" :gutterWidth="gutterWidth"  :data="waterLists"  @loadmore="loadmore"  @scroll="scroll"  >
       <template >
-        <div class="cell-item" v-for="(item,index) in waterLists" :key="index">
-          <div class="item-body" v-for="(listItem, index) in item.topics" :key="index">
-              <img :src="listItem.picUrl" class="avatar" />
+        <div class="cell-item" v-for="(listItem,index) in waterLists" :key="index">
+          <div class="item-body" >
+              <div class="imgContainer">
+                  <img :lazy-src="listItem.picUrl" :class="{avatar: listItem.layoutType==2}" />
+              </div>
               <div class="name">{{listItem.title}}</div>
               <div class="user">
-                  <img class="imgUser" :src="listItem.avatar" alt="">
+                  <img class="imgUser" :lazy-src="listItem.avatar" alt="">
                   <span>{{listItem.nickname}}</span>
                   <div class="lookContainer">
                       <img src="../../../public/images/look.png" alt="">
                       <span class="num">1778</span>
                   </div>
               </div>
-              <div class="footer">
-                  <div class="shopName">{{listItem.subTitle}}</div>
+              <div class="footer" v-if="listItem.buyNow">
+                  <div class="shopName">{{listItem.buyNow.itemName}}</div>
                   <div class="toBuy">去购买 ></div>
               </div>
           </div>
@@ -121,9 +123,6 @@ export default{
         this.$nextTick(() => {
             this.initList()
         })
-        // let result = await axios('/online/topic/v1/find/recAuto.json?page=1&size=5&exceptIds=')
-        // console.log(result.data.data.result);
-        // this.waterLists = result.data.data.result
     },
 	computed:{
 	    itemWidth(){  
@@ -135,15 +134,22 @@ export default{
 	},
 	methods:{
         async initList(){
-            let result = await axios('/online/topic/v1/find/recAuto.json?page=1&size=5&exceptIds=')
-            console.log(result.data.data.result);
-            this.waterLists = result.data.data.result
+            let page = 1
+            let resultWater = await axios('/online/topic/v1/find/recAuto.json?page=1&size=5&exceptIds='+page)
+            console.log(resultWater.data.data.result);
+            // this.waterLists = resultWater.data.data.result
+            let logs = resultWater.data.data.result
+            logs.forEach(item => {
+                this.waterLists.push( ...item.topics, item.look)
+            })
+            console.log(this.waterLists);
+
         },
         scroll(scrollData){
                 // console.log(scrollData)
         },
 	    switchCol(col){
-	        this.col = col
+	        // this.col = col
 	            // console.log(this.col)
 	    },
 	    loadmore(index){
@@ -184,10 +190,18 @@ export default{
     background: white;
     margin-bottom: 20px;;
 }
-.avatar{
-    width: 172.5*2px;
+.imgContainer img{
+    width: 100%;
+    // width: 172.5*2px;
+    // height: 95.83*2px;
+    // margin-left: -35%;
+}
+.imgContainer .avatar{
+    // width: 100%;
+    width: 172.5*3.4px;
     height: 172.5*2px;
-    background: pink;
+    margin-left: -34%;
+    // background: pink;
 }
 .name{
     width: 155.5*2px;
@@ -212,6 +226,7 @@ export default{
     text-align: left;
 }
 .user{
+    position: relative;
     padding: 8.5*2px 8*2px 12*2px;
     width: 171.5*2px;
     height: 44.5*2px;
@@ -219,7 +234,7 @@ export default{
     // padding: 8.5*2px 8*2px 12*2px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    // justify-content: space-between;
     border-bottom: 1px solid #eee;
     margin-bottom: 20px;
 }
@@ -239,6 +254,8 @@ export default{
     margin-left: .08rem;
 }
 .lookContainer{
+    position: absolute;
+    right: 20px;
     height: 24*2px;
     text-align: center;
     line-height: 24*2px;
