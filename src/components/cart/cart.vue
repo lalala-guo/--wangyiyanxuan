@@ -22,7 +22,12 @@
     </div>
 
     <div class="contentContainer">
-        <div class="content"></div>
+        <div class="content">
+          <img class="cartBig" src="../../../public/images/cartBig.webp" alt="">
+          <div>
+            <van-button type="danger" class="text">登录</van-button>
+          </div>
+        </div>
     </div>
   </div>
 </template>
@@ -82,12 +87,31 @@ export default {
 }
 
 .contentContainer{
-  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 158px;
+  height: calc(100vh - 158px);
   background:  #f4f4f4;
+  /* box-sizing: border-box; */
 }
 .content{
+  z-index: 99;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 300px;
-  background: pink;
-  margin-top: 498px;
+  margin-top: 384px;
+  text-align: center;
+}
+.cartBig{
+  width: 248px;
+  height: 248px;
+  margin-bottom: 20px;
+}
+.text{
+  width: 480px;
+  height: 92px;
 }
 </style>
