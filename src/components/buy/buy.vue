@@ -36,11 +36,7 @@
             </div>
           </div>
           <!-- Add Pagination -->
-          <div class="swiper-pagination">
-            <span class="paginationItem active"></span>
-            <span class="paginationItem"></span>
-            <span class="paginationItem"></span>
-            <span class="paginationItem"></span>
+          <div class="swiper-scrollbar">
           </div>
         </div>
       </div>
@@ -56,6 +52,7 @@ import axios from 'axios'
 import '../../package/swiper-bundle.min.css'
 import '../../package/swiper-bundle.min.js'
 import Swiper from 'swiper'
+import 'swiper/css/swiper.css'
 import Water from './waterfall.vue'
 export default {
   data(){
@@ -81,17 +78,38 @@ export default {
         slidesPerView: 4,
         slidesPerColumn: 2,
         // spaceBetween: 10,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
+        // pagination: {
+        //   el: '.swiper-pagination',
+        //   clickable: true,
+        // },
+        scrollbar: {
+          el: ".swiper-scrollbar",
+          dragSize: 20
+        }
       });
+      swiper.scrollbar.dragEl.style.background='#DD1A21'
+      console.log();
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
+
+.swiper-container-horizontal > .swiper-scrollbar{
+  height: 5px;
+  width: 200px;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+}
+.swiper-scrollbar-drag{
+  height: 5px;
+  width: 200px;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+}
 .waterContainer{
   padding-top: 400*2px;
 }
@@ -142,6 +160,7 @@ export default {
   justify-content: space-between;
 }
 .find{
+  margin-left: 10px;
   background-image: url('../../../public/images/sousuo.webp');
 }
 .cart{
@@ -204,6 +223,7 @@ export default {
 }
 .swiper-slide {
   margin-top: 18*2px;
+  margin-bottom: 18*2px;
   // margin-right: 6px;
   padding: 0 3*2px 3*2px;
   width: 84*2px;
@@ -211,7 +231,7 @@ export default {
   text-align: center;
   font-size: 18px;
   background: #fff;
-  margin-bottom: 3*2px;
+  // margin-bottom: 3*2px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -228,6 +248,7 @@ export default {
 .item1{
   width: 84*2px;
   height: 100.5*2px;
+  margin-bottom: 20px;
   // background: yellow;
 }
 .item2{

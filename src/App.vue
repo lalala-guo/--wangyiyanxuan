@@ -14,7 +14,7 @@
                     </div>
                     <div @click="changeActive('icon2')">
                         <Router-link class="item" :class="{active: activeFlag === 'icon2'}" to="/category">
-                            <i class="icon2" ></i>
+                            <i class="icon2"></i>
                             <span >分类</span>
                         </Router-link>
                     </div>
@@ -30,11 +30,11 @@
                             <span>购物车</span>
                         </Router-link>
                     </div>
-                    <div @click="changeActive('icon5')">
-                        <Router-link class="item" :class="{active: activeFlag === 'icon5'}" to="/personal">
+                    <div @click="changeActive('icon5')" >
+                        <div class="item" @click="toPersonal" :class="{active: activeFlag === 'icon5'}" >
                             <i class="icon5 "></i>
                             <span>个人</span>
-                        </Router-link>
+                        </div>
                     </div>
             </div>
         </div>
@@ -60,6 +60,12 @@ export default {
     //     })
     // }
     methods:{
+        toPersonal(){
+            this.$router.push('./personal')
+            // 获取 tabBar
+            let tabBar = document.querySelector('.tabBarWrap')
+            tabBar.style.display='none'
+        },
         changeActive(flag){
             console.log(flag);
             this.activeFlag = flag

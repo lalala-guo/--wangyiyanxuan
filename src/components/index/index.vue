@@ -132,6 +132,8 @@ export default {
     },
     toSousuo(){
       this.$router.push({path:'/sousuo'})
+      let tabBar = document.querySelector('.tabBarWrap')
+      tabBar.style.display='none'
     },
     showPopup() {
       this.show = true;

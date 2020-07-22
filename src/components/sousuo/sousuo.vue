@@ -35,6 +35,8 @@ export default {
             // let id = this.$route.params.id
             // console.log(id);
             this.$router.push('./index')
+            let tabBar = document.querySelector('.tabBarWrap')
+            tabBar.style.display='block'
         }
     }
 }
