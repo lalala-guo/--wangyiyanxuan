@@ -1,6 +1,6 @@
 <template>
   <div class="container-water-fall">
-    <waterfall :col='col' :width="itemWidth" :gutterWidth="gutterWidth"  :data="waterLists"  @loadmore="loadmore"  @scroll="scroll"  >
+    <waterfall :col='col' :data="waterLists"  @loadmore="loadmore"   >
       <template >
         <div class="cell-item" v-for="(listItem,index) in waterLists" :key="index">
           <div class="item-body" >
@@ -24,136 +24,36 @@
         </div>
       </template>
     </waterfall>
-    
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
 import axios from 'axios'
 export default{
 	data(){
 	    return{
             waterLists:[],
-	        data:[
-                    {
-							"categoryType": 0,
-							"showIndex": 1,
-							"superCategoryId": 1005000,
-							"level": "L2",
-							"wapBannerUrl": "https://yanxuan.nosdn.127.net/1d89de114797fb9237314920695c564d.png",
-							"name": "秋冬好物",
-							"id": 109243003,
-							"frontDesc": "温暖秋冬",
-							"type": 0,
-							"subCateList": [],
-							"frontName": "秋冬好物"
-					},
-					{
-							"categoryType": 0,
-							"showIndex": 2,
-							"superCategoryId": 1005000,
-							"level": "L2",
-							"wapBannerUrl": "https://yanxuan.nosdn.127.net/0fe3073506c10f604c4ed7e0ba65d1f4.png",
-							"name": "主题床品",
-							"id": 109243004,
-							"frontDesc": "设计点亮，品质当道",
-							"type": 0,
-							"subCateList": [],
-							"frontName": "设计点亮，品质当道"
-					},
-					{
-							"categoryType": 0,
-							"showIndex": 3,
-							"superCategoryId": 1005000,
-							"level": "L2",
-							"wapBannerUrl": "https://yanxuan.nosdn.127.net/02d3e51b8db87c331dc73bef9e217133.png",
-							"name": "北欧原木",
-							"id": 109252033,
-							"frontDesc": "经典北欧风，打造原木家",
-							"type": 0,
-							"subCateList": [],
-							"frontName": "经典北欧风，打造原木家"
-					},
-					{
-							"categoryType": 0,
-							"showIndex": 4,
-							"superCategoryId": 1005000,
-							"level": "L2",
-							"wapBannerUrl": "https://yanxuan-item.nosdn.127.net/4ccd6ee87a83918474e7e962b06d96fd.png",
-							"name": "餐厨爆款清单",
-							"id": 109261015,
-							"frontDesc": "烹饪享乐趣",
-							"type": 0,
-							"subCateList": [],
-							"frontName": "烹饪享乐趣"
-					},
-					{
-							"categoryType": 0,
-							"showIndex": 6,
-							"superCategoryId": 1005000,
-							"level": "L2",
-							"wapBannerUrl": "https://yanxuan.nosdn.127.net/ed6400e5be573e1524cdef0b5c9e462d.png",
-							"bannerUrl": "",
-							"name": "床品件套",
-							"id": 1008009,
-							"frontDesc": "甄选品质，睡眠美学",
-							"type": 0,
-							"subCateList": [],
-							"frontName": "甄选品质，睡眠美学"
-					},
-					{
-							"categoryType": 0,
-							"showIndex": 7,
-							"superCategoryId": 1005000,
-							"level": "L2",
-							"wapBannerUrl": "https://yanxuan.nosdn.127.net/96d109867f08a14af62d2390b7787439.png",
-							"name": "被枕盖毯",
-							"id": 109260008,
-							"frontDesc": "陷进柔软，多样选择",
-							"type": 0,
-							"subCateList": [],
-							"frontName": "陷进柔软，多样选择"
-					},
-                ],
-	            col:2,
+            col:2,
+            page: 1,
 	    }
     },
     mounted(){
         this.$nextTick(() => {
-            this.initList()
+            this.initList(1)
         })
     },
-	computed:{
-	    itemWidth(){  
-	            // return (138*0.5*(document.documentElement.clientWidth/375)) 
-	    },
-	    gutterWidth(){
-	            // return (9*0.5*(document.documentElement.clientWidth/375))
-	    }
-	},
 	methods:{
-        async initList(){
-            let page = 1
-            let resultWater = await axios('/online/topic/v1/find/recAuto.json?page=1&size=5&exceptIds='+page)
-            console.log(resultWater.data.data.result);
-            // this.waterLists = resultWater.data.data.result
+        async initList(page){
+            let resultWater = await axios(`/online/topic/v1/find/recAuto.json?page=${page}&size=5&exceptIds=`)
             let logs = resultWater.data.data.result
             logs.forEach(item => {
                 this.waterLists.push( ...item.topics, item.look)
             })
-            console.log(this.waterLists);
-
         },
-        scroll(scrollData){
-                // console.log(scrollData)
-        },
-	    switchCol(col){
-	        // this.col = col
-	            // console.log(this.col)
-	    },
 	    loadmore(index){
-	        this.data = this.data.concat(this.data)
+            console.log('触底');
+            let pagmore = this.page += 1
+            this.initList(pagmore)
 	    }
 	}
 }

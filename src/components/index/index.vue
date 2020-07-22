@@ -163,7 +163,7 @@ export default {
 <style scoped>
 .indexContainer{
   /* position: relative; */
-  position: flex;
+  /* position: fixed; */
   top: 0;
   left: 0; 
   overflow: hidden;

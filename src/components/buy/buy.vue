@@ -1,8 +1,10 @@
 <template>
   <div class="buyContainer">
     <div class="topContainer">
-      <div class="homeContainer">
-        <i class="home"></i>
+      <div class="leftContainer">
+        <div class="homeContainer">
+          <i class="home"></i>
+        </div>
       </div>
       <div class="textContainer">值得买</div>
       <div class="rightContainer">
@@ -16,7 +18,7 @@
     </div>
     <div class="swiperCenterContainer">
       <div class="top">
-        <img class="bg" src="../../../public/images/buybg.png" alt="">
+        <img class="bg" src="../../../public/images/buybg.png" alt="" />
         <img class="bLogo" src="../../../public/images/buylogo.png" alt="">
         <span class="centerText">严选好物 用心生活</span>
       </div>
@@ -43,7 +45,9 @@
         </div>
       </div>
     </div>
-    <Water />
+    <div class="waterContainer">
+      <Water />
+    </div>
   </div>
 </template>
 
@@ -65,11 +69,9 @@ export default {
   },
   async mounted(){
     let result = await axios('/online/topic/v1/know/navWap.json')
-    // console.log(result);
     this.swiperList = result.data.data
-    // console.log(this.swiperList);
     // 初始化轮播
-    this.$nextTick(() => {
+    await this.$nextTick(() => {
       this.initSwiper()
     })
   },
@@ -89,9 +91,13 @@ export default {
 }
 </script>
 
-<style lang="less" scoped> 
+<style lang="less" scoped>
+.waterContainer{
+  padding-top: 400*2px;
+}
 .topContainer{
-  position: flex;
+  position: fixed;
+  z-index: 99;
   top: 0;
   left: 0;
   width: 100%;
@@ -100,6 +106,9 @@ export default {
   display: flex;
   justify-content: space-between;
   background: white;
+}
+.leftContainer{
+  width: 70.5*2px;
 }
 .homeContainer{
   width: 23*2px;
@@ -138,10 +147,15 @@ export default {
 .cart{
   background-image: url('../../../public/images/cart.png');
 }
+
 .swiperCenterContainer{
+  position: absolute;
   width: 375*2px;
   height: 342.5*2px;
-  margin-bottom: 30px;
+  // margin-bottom: 30px;
+  margin-bottom: 130px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .bLogo{
   width: 65*2px;
@@ -162,7 +176,11 @@ export default {
   color: #FFF;
 }
 .bg{
-  position: relative;
+  margin-top: 100px;
+  position: absolute;
+  // top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 375*2px;
   height: 259*2px;
 }
@@ -186,7 +204,7 @@ export default {
 }
 .swiper-slide {
   margin-top: 18*2px;
-  margin-right: 6px;
+  // margin-right: 6px;
   padding: 0 3*2px 3*2px;
   width: 84*2px;
   height: 100.5*2px;
