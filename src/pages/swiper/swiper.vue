@@ -1,174 +1,84 @@
 <template>
-        <!-- Swiper -->
-            <div class="swiper-container" autoplay>
-                <div class="swiper-wrapper">
-                    <!-- <div class="swiper-slide">
-                        <img src="../../../public/images/01.webp" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../../../public/images/02.webp" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../../../public/images/03.webp" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../../../public/images/04.webp" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../../../public/images/05.webp" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../../../public/images/06.webp" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../../../public/images/07.webp" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="../../../public/images/08.webp" />
-                    </div> -->
-                    <van-swipe class="swiper-wrapper" @change="onChange" :autoplay="3000" indicator indicator-color="white">
-                        <van-swipe-item class="swiper-slide">
-                            <img src="../../../public/images/01.webp" />
-                        </van-swipe-item >
-                        <van-swipe-item class="swiper-slide">
-                            <img src="../../../public/images/02.webp" />
-                        </van-swipe-item>
-                        <van-swipe-item class="swiper-slide">
-                            <img src="../../../public/images/03.webp" />
-                        </van-swipe-item>
-                        <van-swipe-item class="swiper-slide">
-                            <img src="../../../public/images/04.webp" />
-                        </van-swipe-item>
-                        <van-swipe-item class="swiper-slide">
-                            <img src="../../../public/images/05.webp" />
-                        </van-swipe-item>
-                        <van-swipe-item class="swiper-slide">
-                            <img src="../../../public/images/06.webp" />
-                        </van-swipe-item>
-                        <van-swipe-item class="swiper-slide">
-                            <img src="../../../public/images/07.webp" />
-                        </van-swipe-item>
-                        <van-swipe-item class="swiper-slide" >
-                            <img src="../../../public/images/08.webp" />
-                        </van-swipe-item>
-                        
-                        <template #indicator>
-                            <div class="custom-indicator">
-                                <span class="swiper-pagination-bottom" @click="clickChange(0)" :class="{active: current === 0}"></span>
-                                <span class="swiper-pagination-bottom" @click="clickChange(1)" :class="{active: current === 1}"></span>
-                                <span class="swiper-pagination-bottom" @click="clickChange(2)" :class="{active: current === 2}"></span>
-                                <span class="swiper-pagination-bottom" @click="clickChange(3)" :class="{active: current === 3}"></span>
-                                <span class="swiper-pagination-bottom" @click="clickChange(4)" :class="{active: current === 4}"></span>
-                                <span class="swiper-pagination-bottom" @click="clickChange(5)" :class="{active: current === 5}"></span>
-                                <span class="swiper-pagination-bottom" @click="clickChange(6)" :class="{active: current === 6}"></span>
-                                <span class="swiper-pagination-bottom" @click="clickChange(7)" :class="{active: current === 7}"></span>
-                            </div>
-                        </template>
-                    </van-swipe>
-                </div>
-                <!-- <div class="swiper-pagination">
-                    <span class="swiper-pagination-bottom active" ></span>
-                    <span class="swiper-pagination-bottom"></span>
-                    <span class="swiper-pagination-bottom"></span>
-                    <span class="swiper-pagination-bottom"></span>
-                    <span class="swiper-pagination-bottom"></span>
-                    <span class="swiper-pagination-bottom"></span>
-                    <span class="swiper-pagination-bottom"></span>
-                    <span class="swiper-pagination-bottom"></span>
-                </div> -->
-            </div>
+  <div>
+    <van-swipe  ref="vanSwiper" @change="onChange" class="my-swipe" :autoplay="3000" indicator-color="white">
+      <van-swipe-item v-for="(item, index) in swipeData" :key="index">
+        <img  :src="item" >
+      </van-swipe-item>
+      <template #indicator>
+        <div class="container" >
+          <div @click="changeSwiperItem(index)" v-for="(item, index) in swipeData" 
+              :key="index" class="custom-indicator"
+              :class="{active:index===current}"
+              >
+          </div>
+        </div>
+      </template>
+    </van-swipe>
+  </div>
 </template>
-
 <script>
-import '../../package/swiper-bundle.min.css'
-import '../../package/swiper-bundle.min.js'
-import Swiper from 'swiper'
 export default {
-    data() {
+  data() {
     return {
-      current: 0,
-    };
+        //  轮播的数组
+      swipeData: [
+          'https://yanxuan.nosdn.127.net/53bcfcfc2f09f674a3a2e1372e3811ad.png?type=webp&imageView&quality=75&thumbnail=750x0',
+          'https://yanxuan.nosdn.127.net/5a41cb42da592557824f8e546cff6693.jpg?type=webp&imageView&quality=75&thumbnail=750x0',
+          'https://yanxuan.nosdn.127.net/e1d32c538a9fcf420411592746098ad2.jpg?type=webp&imageView&quality=75&thumbnail=750x0',
+          'https://yanxuan.nosdn.127.net/8104acf1cc1514a88ea0b7d030e9a55e.jpg?type=webp&imageView&quality=75&thumbnail=750x0',
+          'https://yanxuan.nosdn.127.net/2a1b91834498b175effc84f0e23547c4.jpg?type=webp&imageView&quality=75&thumbnail=750x0',
+          'http://yanxuan-miaobi.nos-jd.163yun.com/3989779_1_6_wap_af2ab96b6e10e59572ca453a305be775.jpg?type=webp&imageView&quality=75&thumbnail=750x0',
+          'http://yanxuan-miaobi.nos-jd.163yun.com/3805013_1_1_wap_3daf23060c99862470ef09b107f50dcc.jpg?type=webp&imageView&quality=75&thumbnail=750x0',
+          'https://yanxuan.nosdn.127.net/50bc9d8901b05f7917156584812a853f.jpg?type=webp&imageView&quality=75&thumbnail=750x0',
+      ],
+      current:0,//轮播的下标
+    }
   },
   methods: {
+     //轮播图发生变化的回调
     onChange(index) {
+        // 更改current的值
       this.current = index;
     },
-    clickChange(index){
-        
-        this.onChange(index)
-
-        let num = -index-this.current
-        let width = (num * 325)
-        let goAway = 'translateX(' + width + 'px)'
-        let container = document.querySelector('.van-swipe__track')
-        container.style.transform = goAway
-        this.onChange(index)
+    //点击指示器的回调
+    changeSwiperItem(index){
+        // swiperTo 切换到指定位置
+      this.$refs.vanSwiper.swipeTo(index);
     }
   },
-    mounted(){
-        var swiper = new Swiper('.swiper-container', {
-            autoplay: {
-                delay: 2500,
-            },
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    }
 }
 </script>
-
-<style lang="stylus" rel="stylesheet/stylus" scoped>
-    .swiper-container 
-            width 100%
-            height 296px
-            .swiper-wrapper
-                width 100%
-                height 296px
-                .swiper-slide 
-                    width 100%
-                    height 100%
-                    text-align center
-                    // font-size 36.5px
-                    background #fff
-                    display -webkit-box
-                    display -ms-flexbox
-                    display -webkit-flex
-                    display flex
-                    -webkit-box-pack center
-                    -ms-flex-pack center
-                    -webkit-justify-content center
-                    justify-content cente
-                    -webkit-box-align center
-                    -ms-flex-align center
-                    -webkit-align-items center
-                    align-items center
-                    img
-                        width 100%
-                        height auto
-            .custom-indicator
-                position absolute
-                bottom 30px
-                left 50%
-                transform translateX(-50%)
-                white-space nowrap
-                .swiper-pagination-bottom
-                    width 40px
-                    height 4px
-                    display inline-block
-                    background #fff
-                    opacity .4
-                    border-radius 0
-                    margin-right 10px
-                    &.active
-                        opacity 1
-
-
-
+<style lang="less" scoped>
+  .my-swipe {
+        height: 320px;
+        width: 750px;
+        .container{
+          width: 100%;
+          position: absolute;
+          left: 0;
+          bottom: 30px;
+          display: flex;
+          justify-content: center;
+        }
+        .custom-indicator {
+          font-size: 12px;
+          background-color: #fff;
+          width: 40px;
+          border-radius: 10px;
+          height: 4px;
+          margin-right: 8px;
+          opacity: .4;
+          &.active{
+            opacity: 1;
+          }
+        }
+        .van-swipe-item{
+          height:296px;
+          bottom: 40px;
+          img{
+          // width: 100%;
+          height: 370px;
+        }
+        }
+      }
 </style>

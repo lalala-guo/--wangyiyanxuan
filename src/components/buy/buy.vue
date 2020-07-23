@@ -105,7 +105,7 @@ export default {
         }
       });
       swiper.scrollbar.dragEl.style.background='#DD1A21'
-      console.log();
+      
     }
   }
 }
