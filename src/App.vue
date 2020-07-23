@@ -51,7 +51,6 @@ export default {
     },
     mounted(){
         this.$globalEventBus.$on('display', (v) => {
-            console.log(v);
             if(v === 'sousuo'){
                 let tabBar = document.querySelector('.tabBarWrap')
                 tabBar.style.display='none'

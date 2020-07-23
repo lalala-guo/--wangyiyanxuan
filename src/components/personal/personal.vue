@@ -111,6 +111,7 @@ export default {
       console.log('submit', values);
     },
     toIndex(){
+      this.$globalEventBus.$emit('active', '/index')
       this.$router.push('./index')
       let tabBar = document.querySelector('.tabBarWrap')
       tabBar.style.display='block'
