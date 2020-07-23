@@ -2,16 +2,16 @@
   <div class="buyContainer">
     <div class="topContainer">
       <div class="leftContainer">
-        <div class="homeContainer">
-          <i class="home"></i>
+        <div class="homeContainer" @click="toIndex">
+          <i class="home" ></i>
         </div>
       </div>
       <div class="textContainer">值得买</div>
       <div class="rightContainer">
-        <div class="homeContainer">
+        <div class="homeContainer" @click="toSousuo">
           <i class="home find"></i>
         </div>
-        <div class="homeContainer">
+        <div class="homeContainer" @click="toCart">
           <i class="home cart"></i>
         </div>
       </div>
@@ -75,6 +75,21 @@ export default {
     })
   },
   methods:{
+    toIndex(){
+      this.$router.push('./index')
+      let tabBar = document.querySelector('.tabBarWrap')
+      tabBar.style.display='block'
+    },
+    toSousuo(){
+      this.$router.push('/sousuo?key=buy')
+      let tabBar = document.querySelector('.tabBarWrap')
+      tabBar.style.display='none'
+    },
+    toCart(){
+      this.$router.push('./cart')
+      let tabBar = document.querySelector('.tabBarWrap')
+      tabBar.style.display='block'
+    },
     initSwiper(){
       var swiper = new Swiper('.swiper-container', {
         slidesPerView: 4,

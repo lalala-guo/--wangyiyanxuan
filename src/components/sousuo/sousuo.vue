@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import $globalEventBus from '../../main.js'
 import axios from 'axios'
 var _ = require('lodash');
 export default {
@@ -40,7 +41,8 @@ export default {
         }
     },
     async mounted(){
-        console.log(this.$route.query);
+        this.$globalEventBus.$emit("display", 'sousuo')
+        console.log(this.$route.path);
         let result = await axios('/searchFirst')
         this.searchList = result.data.data
         // let search = await axios('searchList', search)

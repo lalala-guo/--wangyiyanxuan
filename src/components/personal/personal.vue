@@ -94,6 +94,7 @@
 </template>
 
 <script>
+import $globalEventBus from '../../main.js'
 export default {
   data() {
     return {
@@ -101,6 +102,9 @@ export default {
       username: '',
       password: '',
     }
+  },
+  mounted(){
+    this.$globalEventBus.$emit("display", 'sousuo')
   },
   methods:{
     onSubmit(values) {
