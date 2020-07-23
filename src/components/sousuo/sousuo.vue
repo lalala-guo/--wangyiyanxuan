@@ -4,39 +4,70 @@
         <div class="top">
             <div class="inputWrap">
                 <i class="icon"></i>
-                <input placeholder="梅雨季必备好物" />
+                <input value="searchValue" placeholder="梅雨季必备好物" v-model="searchValue" />
             </div>
             <span class="cancel" @click="cancel">取消</span>
         </div>
       </div>
-      <div class="contentContainer">
+      <div class="contentContainer" v-if="!searchValue">
           <div class="title">
               <h3>热门搜索</h3>
           </div>
           <div class="lists">
-            <div class="listItem colorRed">梅雨季必备</div>
-            <div class="listItem">牛奶</div>
-            <div class="listItem">电动牙刷</div>
-            <div class="listItem colorRed">梅雨季必备</div>
-            <div class="listItem">牛奶</div>
-            <div class="listItem">电动牙刷</div>
-            <div class="listItem colorRed">梅雨季必备</div>
-            <div class="listItem">牛奶</div>
-            <div class="listItem">电动牙刷</div>
+            <div class="listItem" :class="{colorRed: item.type===0}" v-for="(item, index) in searchList.hotKeywordVOList" :key="index">
+                {{item.keyword}}
+            </div>
           </div>
       </div>
+      <div class="searchList" v-else>
+        <van-cell-group>
+            <van-cell v-for="(item, index) in searchNameList" :key="index" :title="item"  is-link/>
+        </van-cell-group>
+       </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+var _ = require('lodash');
 export default {
+    data(){
+        return {
+            searchList:{},
+            searchValue: '',
+            searchNameList: [],
+            flag: ''
+        }
+    },
+    async mounted(){
+        console.log(this.$route.query);
+        let result = await axios('/searchFirst')
+        this.searchList = result.data.data
+        // let search = await axios('searchList', search)
+        this.flag = this.$route.query.key
+    },
     methods:{
         cancel(){
             // let id = this.$route.params.id
             // console.log(id);
-            this.$router.push('./index')
+            console.log(this.flag);
+            // let log = this.flag.toString
+            this.$router.push('./'+ this.flag)
             let tabBar = document.querySelector('.tabBarWrap')
             tabBar.style.display='block'
+        }
+    },
+    watch: {
+         searchValue(v){
+             // 防抖  lodash里面
+            _.debounce(async (v) => {
+                let search = await axios(`/online/xhr/search/searchAutoComplete.json?keywordPrefix=${v}`)
+                // console.log(search.data.data);
+                this.searchNameList = search.data.data 
+            }, 500, {
+                'leading': true,
+                'trailing': false
+            })(v)
         }
     }
 }
@@ -133,4 +164,9 @@ html,body{
     border-color: #DD1A21;
     color: #DD1A21;
 }
+
+.searchList{
+    width: 100%;
+}
+
 </style>

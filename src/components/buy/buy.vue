@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import $globalEventBus from '../../main.js'
 import axios from 'axios'
 import '../../package/swiper-bundle.min.css'
 import '../../package/swiper-bundle.min.js'
@@ -65,6 +66,7 @@ export default {
     Water
   },
   async mounted(){
+    this.$globalEventBus.$emit('active', this.$route.path)
     let result = await axios('/online/topic/v1/know/navWap.json')
     this.swiperList = result.data.data
     // 初始化轮播

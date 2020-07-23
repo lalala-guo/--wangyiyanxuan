@@ -131,7 +131,7 @@ export default {
       this.show = false
     },
     toSousuo(){
-      this.$router.push({path:'/sousuo'})
+      this.$router.push('/sousuo?key=index')
       let tabBar = document.querySelector('.tabBarWrap')
       tabBar.style.display='none'
     },

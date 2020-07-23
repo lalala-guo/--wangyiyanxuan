@@ -6,33 +6,33 @@
         <!-- tabBar -->
         <div class="tabBarWrap">
             <div class="tabBar">
-                    <div @click="changeActive('icon1')">
-                        <Router-link class="item" :class="{active: activeFlag === 'icon1'}" to="/index">
-                            <i class="icon1"></i>
+                    <div @click="changeActive('index')">
+                        <div class="item" @click="toIndex" :class="{active: activeFlag === 'index'}">
+                            <i class="index"></i>
                             <span>首页</span>
-                        </Router-link>
+                        </div>
                     </div>
-                    <div @click="changeActive('icon2')">
-                        <Router-link class="item" :class="{active: activeFlag === 'icon2'}" to="/category">
-                            <i class="icon2"></i>
+                    <div @click="changeActive('category')">
+                        <div class="item" @click="toCategory" :class="{active: activeFlag === 'category'}">
+                            <i class="category"></i>
                             <span >分类</span>
-                        </Router-link>
+                        </div>
                     </div>
-                    <div @click="changeActive('icon3')">
-                        <Router-link class="item" :class="{active: activeFlag === 'icon3'}" to="/buy">
-                            <i class="icon3"></i>
+                    <div @click="changeActive('buy')">
+                        <div class="item" @click="toBuy" :class="{active: activeFlag === 'buy'}">
+                            <i class="buy"></i>
                             <span>值得买</span>
-                        </Router-link>
+                        </div>
                     </div>
-                    <div @click="changeActive('icon4')">
-                        <Router-link class="item" :class="{active: activeFlag === 'icon4'}" to="/cart">
-                            <i class="icon4 "></i>
+                    <div @click="changeActive('cart')">
+                        <div class="item" @click="toCart" :class="{active: activeFlag === 'cart'}">
+                            <i class="cart "></i>
                             <span>购物车</span>
-                        </Router-link>
+                        </div>
                     </div>
-                    <div @click="changeActive('icon5')" >
-                        <div class="item" @click="toPersonal" :class="{active: activeFlag === 'icon5'}" >
-                            <i class="icon5 "></i>
+                    <div @click="changeActive('personal')" >
+                        <div class="item" @click="toPersonal" :class="{active: activeFlag === 'personal'}" >
+                            <i class="personal "></i>
                             <span>个人</span>
                         </div>
                     </div>
@@ -42,32 +42,53 @@
 </template>
 
 <script>
-// import './rem.js'
+import $globalEventBus from './main.js'
 export default {
     data(){
         return {
-            activeFlag:'icon1'
+            activeFlag:'index'
         }
     },
-    // mounted(){
-    //     let divs = document.querySelectorAll('.tabBar .item')
-    //     divs.forEach((item, index) => {
-    //         item.addEventListener('click', () => {
-    //             console.log("click");
-    //             item.className = 'item active'
-
-    //         })
-    //     })
-    // }
+    mounted(){
+        this.$globalEventBus.$on('active', (v) => {
+            this.activeFlag = v.split('/')[1]
+            
+        })
+        // console.log(this.$route);
+        // this.activeFlag = this.$route.query
+    },
     methods:{
+        toIndex(){
+            if(this.$route.path === '/index'){
+                this.activeFlag = 'index'
+                return
+            }
+            this.$router.push('/index')
+        },
+        toCategory(){
+            if(this.$route.path === '/category') {
+                this.activeFlag = 'category'
+                return
+            }
+            this.$router.push('/category')
+        },
+        toBuy(){
+            if(this.$route.path === '/buy') return
+            this.$router.push('/buy')
+        },
+        toCart(){
+            if(this.$route.path === '/cart') return
+            this.$router.push('/cart')
+        },
         toPersonal(){
-            this.$router.push('./personal')
+            if(this.$route.path === '/personal') return
+           this.$router.push('/personal')
             // 获取 tabBar
             let tabBar = document.querySelector('.tabBarWrap')
             tabBar.style.display='none'
         },
         changeActive(flag){
-            console.log(flag);
+            // console.log(flag);
             this.activeFlag = flag
         }
     }
@@ -115,19 +136,19 @@ export default {
     .item.active span{
         color: #b5262d;
     }
-    .item.active .icon1{
+    .item.active .index{
         background-position-y: -200px;
     }
-    .item.active .icon2{
+    .item.active .category{
         background-position-y: -100px;
     }
-    .item.active .icon3{
+    .item.active .buy{
         background-position-y: -300px;
     }
-    .item.active .icon4{
+    .item.active .cart{
         background-position-y: -0px;
     }
-    .item.active .icon5{
+    .item.active .personal{
         background-position-y: -400px;
     }
     .item i {
@@ -136,20 +157,20 @@ export default {
         background-image: url("../public/images/xuebi.webp");
         background-size: 40px;
     }
-    .item .icon1{
+    .item .index{
         background-position-y: -250px;
     }
     
-    .item .icon2{
+    .item .category{
         background-position-y: -150px;
     }
-    .item .icon3{
+    .item .buy{
         background-position-y: -350px;
     }
-    .item .icon4{
+    .item .cart{
         background-position-y: -50px;
     }
-    .item .icon5{
+    .item .personal{
         background-position-y: -450px;
     }
 

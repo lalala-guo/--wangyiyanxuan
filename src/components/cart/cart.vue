@@ -33,8 +33,11 @@
 </template>
 
 <script>
+import $globalEventBus from '../../main.js'
 export default {
-
+  mounted(){
+    this.$globalEventBus.$emit('active', this.$route.path)
+  }
 }
 </script>
 

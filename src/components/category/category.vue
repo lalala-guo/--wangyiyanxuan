@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import $globalEventBus from '../../main.js'
 import CateGoryOne from '../../pages/cateGoryOne/cateGoryOne.vue'
 import BScroll from "@better-scroll/core";
 import {mapState, mapActions, mapMutations,mapGetters} from 'vuex'
@@ -79,6 +80,7 @@ export default {
     CateGoryOne
   },
   async mounted(){
+    this.$globalEventBus.$emit('active', this.$route.path)
     this.init()
     this.getCateData()
     this.getCateList()
@@ -106,7 +108,7 @@ export default {
       getCateList: 'getCateList'
     }),
     toSousuo(){
-      this.$router.push({path:'/sousuo' })
+      this.$router.push('/sousuo?key=category')
     },
 
     init() {

@@ -32,7 +32,15 @@ module.exports = {
           pathRewrite: {  
             '^/online': ''
           }
-        }
+        },
+        'searchFirst': {
+          target: 'https://m.you.163.com/xhr/search/init.json',
+          changeOrigin: true, // 支持跨域
+          //路径重写
+          pathRewrite: {  
+            '^/searchFirst': ''
+          }
+        },        
       }
     }
   }
