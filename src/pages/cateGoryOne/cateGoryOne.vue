@@ -38,17 +38,6 @@
 import {getCateLists} from '../../api/index.js'
 export default {
     props: ['cateGoryList'],
-    data(){
-        return{
-            // id:11
-        }
-    },
-    async mounted(){
-        // let result = await getCateLists()
-        console.log(this.cateGoryList);
-        // console.log(result.data);
-    }
-
 }
 </script>
 

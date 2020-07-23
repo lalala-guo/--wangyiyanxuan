@@ -1,23 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+// 路由懒加载
 const Index = () => import('../components/index/index.vue')
 const Category = () => import('../components/category/category.vue')
 const Buy = () => import('../components/buy/buy.vue')
 const Cart = () => import('../components/cart/cart.vue')
 const Personal = () => import('../components/personal/personal.vue')
 const Sousuo = () => import('../components/sousuo/sousuo.vue')
-// import Index from '../components/index/index.vue'
-// import Category from '../components/category/category.vue'
-// import Buy from '../components/buy/buy.vue'
-// import Cart from '../components/cart/cart.vue'
-// import Personal from '../components/personal/personal.vue'
-// import Sousuo from '../components/sousuo/sousuo.vue'
 
 import { Button } from 'vant';
-
 Vue.use(Button);
-
 Vue.use(VueRouter)
 
 const router = new VueRouter({

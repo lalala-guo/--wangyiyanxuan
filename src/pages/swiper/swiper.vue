@@ -76,7 +76,6 @@ export default {
           height:296px;
           bottom: 40px;
           img{
-          // width: 100%;
           height: 370px;
         }
         }

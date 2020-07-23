@@ -22,15 +22,7 @@
             <span>{{item.name}}</span>
           </div>
         </div>
-        <!-- 右侧 -->
-        <!-- <div class="right">
-          <div class="linear"></div>
-          <div class="xiala">
-            <i class="icon"></i>
-            <i class="icon"></i>
-          </div>
-        </div> -->
-        
+        <!-- 右侧 -->  
         <div class="right">
           <div class="linear"></div>
           <div class="xiala">
@@ -45,7 +37,7 @@
       <ScroolIndex v-if="navIndex===0"></ScroolIndex>
       <IndexCate v-else :getindexDataList = 'getindexDataList'></IndexCate>
     </div>
-
+    <!--  下来显示内容   遮罩 -->
     <van-overlay duration=0 :show="show"  @click="show = false" class="vanContent">
         <div class="wrapper" @click.stop>
           <div class="block">
@@ -55,7 +47,6 @@
                 <i class="icon"></i>
                 <span>搜索商品, 共34087款好物</span>
               </div>
-              <!-- <button class="btn">登录</button>  plain  hairline -->
               <van-button class="btn" hairline type="danger">登录</van-button>
             </div>
             <div class="contentContainer">
@@ -87,7 +78,6 @@
 <script>
 import ScroolIndex from "../../pages/scrollIndex/scrollIndex.vue";
 import IndexCate from "../../pages/indexCate/indexCate.vue";
-
 import BScroll from "@better-scroll/core";
 import {mapState, mapMutations, mapActions, mapGetters} from 'vuex'
 export default {
@@ -125,7 +115,6 @@ export default {
       
     }),
     changeNavId(navIndex,id){
-      // console.log(navIndex,id);
       this.navIndex = navIndex
       this.navId = id
       this.show = false
@@ -150,7 +139,6 @@ export default {
         probeType: 3 // listening scroll hook
       });
       this._registerHooks(["scroll", "scrollEnd"], pos => {
-        //   console.log('done')
       });
     },
     _registerHooks(hookNames, handler) {
@@ -164,8 +152,6 @@ export default {
 
 <style scoped>
 .indexContainer{
-  /* position: relative; */
-  /* position: fixed; */
   top: 0;
   left: 0; 
   overflow: hidden;
@@ -203,11 +189,6 @@ export default {
   justify-content: center;
   height: 100%;
 }
-/* .block {
-  width: 100%;
-  height: 357px;
-  background-color: #fff;
-} */
 .positions{
   width: 100%;
   position: absolute;
@@ -420,16 +401,5 @@ export default {
   background-image: url("../../../public/images/xiala.webp");
   background-size: 100% 100%;
 }
-/* .vanContent{
-  position: absolute;
-  left: 0;
-  bottom: 0;
-} */
 
-.container {
-  /* position: relative; */
-  /* margin: 0 auto; */
-  /* height: calc(100vh - 148px); */
-  /* margin-top: 148px; */
-}
 </style>

@@ -96,7 +96,6 @@ export default {
   top: 158px;
   height: calc(100vh - 158px);
   background:  #f4f4f4;
-  /* box-sizing: border-box; */
 }
 .content{
   z-index: 99;

@@ -59,10 +59,7 @@ export default {
         })
         this.$globalEventBus.$on('active', (v) => {
             this.activeFlag = v.split('/')[1]
-            
         })
-        // console.log(this.$route);
-        // this.activeFlag = this.$route.query
     },
     methods:{
         toIndex(){
@@ -95,7 +92,6 @@ export default {
             tabBar.style.display='none'
         },
         changeActive(flag){
-            // console.log(flag);
             this.activeFlag = flag
         }
     }

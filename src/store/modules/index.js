@@ -14,13 +14,11 @@ const mutations = {
 const actions = {
     async getIndexCateData({commit}){
         let indexCateDataResult = await getIndexCateData()
-        // console.log(indexDataResult.data);
-			commit("changeIndexCateData",indexCateDataResult.data)
+		commit("changeIndexCateData",indexCateDataResult.data)
     },
     async getIndexData({commit}){
         let indexDataResult = await getIndexData()
-        // console.log(indexDataResult.data);
-			commit("changeIndexData",indexDataResult.data)
+		commit("changeIndexData",indexDataResult.data)
 	}
 }
 const getters = {}

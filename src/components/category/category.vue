@@ -101,7 +101,6 @@ export default {
     changeActiveIndex(index, id){
       this.activeIndex = index
       this.cateId = id
-      console.log(this.cateGoryList);
     },
     ...mapActions({
       getCateData: 'getCateData',
@@ -110,29 +109,28 @@ export default {
     toSousuo(){
       this.$router.push('/sousuo?key=category')
     },
-
     init() {
-            this.bs = new BScroll(this.$refs.scroll, {
-                mouseWheel: true,
-                disableMouse:false,
-                disableTouch: false,
-                resizePolling: 0,
-                scrollY: true,
-                click: true,
-                probeType: 3 // listening scroll hook
-            })
-            this._registerHooks(['scroll', 'scrollEnd'], (pos) => {
-                console.log('done')
-            })
-        },
-        clickHandler (item) {
-            alert(item)
-        },
-        _registerHooks(hookNames, handler) {
-            hookNames.forEach((name) => {
-            this.bs.on(name, handler)
-            })
-        }
+      this.bs = new BScroll(this.$refs.scroll, {
+        mouseWheel: true,
+        disableMouse:false,
+        disableTouch: false,
+        resizePolling: 0,
+        scrollY: true,
+        click: true,
+        probeType: 3 // listening scroll hook
+      })
+      this._registerHooks(['scroll', 'scrollEnd'], (pos) => {
+        console.log('done')
+      })
+    },
+    clickHandler (item) {
+      alert(item)
+    },
+    _registerHooks(hookNames, handler) {
+      hookNames.forEach((name) => {
+        this.bs.on(name, handler)
+      })
+    }
   }
 }
 </script>

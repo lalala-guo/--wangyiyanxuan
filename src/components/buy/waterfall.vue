@@ -51,7 +51,6 @@ export default{
             })
         },
 	    loadmore(index){
-            console.log('触底');
             let pagmore = this.page += 1
             this.initList(pagmore)
 	    }

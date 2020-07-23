@@ -42,18 +42,13 @@ export default {
     },
     async mounted(){
         this.$globalEventBus.$emit("display", 'sousuo')
-        console.log(this.$route.path);
         let result = await axios('/searchFirst')
         this.searchList = result.data.data
-        // let search = await axios('searchList', search)
         this.flag = this.$route.query.key
     },
     methods:{
         cancel(){
-            // let id = this.$route.params.id
-            // console.log(id);
             console.log(this.flag);
-            // let log = this.flag.toString
             this.$router.push('./'+ this.flag)
             let tabBar = document.querySelector('.tabBarWrap')
             tabBar.style.display='block'
@@ -64,7 +59,6 @@ export default {
              // 防抖  lodash里面
             _.debounce(async (v) => {
                 let search = await axios(`/online/xhr/search/searchAutoComplete.json?keywordPrefix=${v}`)
-                // console.log(search.data.data);
                 this.searchNameList = search.data.data 
             }, 500, {
                 'leading': true,
@@ -166,7 +160,6 @@ html,body{
     border-color: #DD1A21;
     color: #DD1A21;
 }
-
 .searchList{
     width: 100%;
 }
