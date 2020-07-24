@@ -8,6 +8,7 @@ const Buy = () => import('../components/buy/buy.vue')
 const Cart = () => import('../components/cart/cart.vue')
 const Personal = () => import('../components/personal/personal.vue')
 const Sousuo = () => import('../components/sousuo/sousuo.vue')
+const LoginPersonal = () => import('../components/personal/loginPersonal.vue')
 
 import { Button } from 'vant';
 Vue.use(Button);
@@ -21,6 +22,10 @@ const router = new VueRouter({
         {
             path: '/',
             redirect: '/index' 
+        },
+        {
+            path: '/loginPersonal',
+            component: LoginPersonal
         },
         {
             path: '/sousuo',

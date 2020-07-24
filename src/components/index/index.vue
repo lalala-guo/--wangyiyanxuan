@@ -9,7 +9,7 @@
           <span>搜索商品, 共34087款好物</span>
         </div>
         <!-- <button class="btn">登录</button>  plain  hairline -->
-        <van-button class="btn" hairline type="danger">登录</van-button>
+        <van-button class="btn" hairline type="danger" @click="toLogin">登录</van-button>
       </div>
       <!-- 导航  -->
       <div class="navContainer" ref="scroll">
@@ -79,7 +79,7 @@
 import ScroolIndex from "../../pages/scrollIndex/scrollIndex.vue";
 import IndexCate from "../../pages/indexCate/indexCate.vue";
 import BScroll from "@better-scroll/core";
-import {mapState, mapMutations, mapActions, mapGetters} from 'vuex'
+import {mapState, mapActions} from 'vuex'
 export default {
   data() {
     return {
@@ -107,7 +107,6 @@ export default {
     getindexDataList(){
       return this.navList.find(item => item.id === this.navId)
     }
-    
   },
   methods: {
     ...mapActions({
@@ -127,7 +126,9 @@ export default {
     showPopup() {
       this.show = true;
     },
-
+    toLogin(){
+      this.$router.push('./personal')
+    },
     init() {
       this.bs = new BScroll(this.$refs.scroll, {
         mouseWheel: true,

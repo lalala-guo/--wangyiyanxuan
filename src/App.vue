@@ -54,9 +54,13 @@ export default {
             if(v === 'sousuo'){
                 let tabBar = document.querySelector('.tabBarWrap')
                 tabBar.style.display='none'
+            }else if(v === 'loginPersonal'){
+                let tabBar = document.querySelector('.tabBarWrap')
+                tabBar.style.display='block'
             }
         })
         this.$globalEventBus.$on('active', (v) => {
+            console.log(v);
             this.activeFlag = v.split('/')[1]
         })
     },

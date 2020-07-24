@@ -23,7 +23,7 @@
         <van-cell-group>
             <van-cell v-for="(item, index) in searchNameList" :key="index" :title="item"  is-link/>
         </van-cell-group>
-       </div>
+      </div>
   </div>
 </template>
 

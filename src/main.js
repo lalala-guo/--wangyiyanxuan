@@ -5,9 +5,12 @@ import store from './store/index.js'
 import router from './router/index'
 
 
-import { Swipe, SwipeItem, CountDown, Icon, Popup, Overlay, Form, Cell, CellGroup } from 'vant';
+import { Swipe, SwipeItem, CountDown, Icon, Popup, Overlay, Form, Cell, CellGroup, Field, RadioGroup, Radio } from 'vant';
 import waterfall from 'vue-waterfall2'
 Vue.use(waterfall)
+Vue.use(Radio);
+Vue.use(RadioGroup);
+Vue.use(Field);
 Vue.use(Cell);
 Vue.use(CellGroup);
 Vue.use(Form);

@@ -1,118 +1,165 @@
 <template>
-  <div class="personalContainer">
-    <div class="topContainer">
-      <div class="leftContainer">
-        <div class="homeContainer">
-          <i class="home" @click="toIndex"></i>
-        </div>
-      </div>
-      <div class="textContainer">
-        <i class="logo" @click="toIndex"></i>
-      </div>
-      <div class="rightContainer">
-        <div class="homeContainer">
-          <i class="home find" @click="toSousuo"></i>
-        </div>
-        <div class="homeContainer">
-          <i class="home cart" @click="toCart"></i>
-        </div>
-      </div>
-    </div>
-    <div class="contentContainer">
-      <div class="getUserContainer">
-        <div class="logoBigContainer">
-          <img src="../../../public/images/logobig.png" alt="">
-        </div>
-        <div class="loginButtonContainer">
-          <div class="phoneLogin">
-            <div class="btn" color="#DD1A21" @click="show = true">
-              <i class="phoneIcon"></i>
-              <span class="phoneText">手机号快捷登录</span>
-            </div>
+  <div>
+    <div v-if="!login" class="personalContainer">
+      <div class="topContainer">
+        <div class="leftContainer">
+          <div class="homeContainer">
+            <i class="home" @click="toIndex"></i>
           </div>
-          <div class="emilLogin">
-            <div plain class="btn" color="#DD1A21">
-              <i class="emilIcon"></i>
-              <span class="emilText">邮箱账号登录</span>
-            </div>
+        </div>
+        <div class="textContainer">
+          <i class="logo" @click="toIndex"></i>
+        </div>
+        <div class="rightContainer">
+          <div class="homeContainer">
+            <i class="home find" @click="toSousuo"></i>
+          </div>
+          <div class="homeContainer">
+            <i class="home cart" @click="toCart"></i>
           </div>
         </div>
       </div>
-      <div class="loginTypeContainer">
-          <div class="loginType">
-            <div class="item weixin">
-              <img src="../../../public/images/weixin.png" alt="">
-              <div>微信</div>
-            </div>
-            <div class="item qq">
-              <img src="../../../public/images/qq.png" alt="">
-              <div>QQ</div>
-            </div>
-            <div class="item weibo">
-              <img src="../../../public/images/weibo.png" alt="">
-              <div>微博</div>
-            </div>
+      <div class="contentContainer">
+        <div class="getUserContainer">
+          <div class="logoBigContainer">
+            <img src="../../../public/images/logobig.png" alt="">
           </div>
-      </div>
-    </div>
-      <!-- 登录页面 -->
-    <van-overlay :show="show" @click="show = false">
-      <div class="wrapper" @click.stop>
-        <div class="block">
-            <div class="loginwrap">
-              <div class="loginHeader">
-                <img src="../../../public/images/logobig.png" alt="">
+          <div class="loginButtonContainer">
+            <div class="phoneLogin">
+              <div class="btn" color="#DD1A21" @click="show = true">
+                <i class="phoneIcon"></i>
+                <span class="phoneText" >手机号快捷登录</span>
               </div>
-                <!-- <van-form @submit="onSubmit">
-                  <van-field
-                    v-model="username"
-                    name="用户名"
-                    label="用户名"
-                    placeholder="用户名"
-                    :rules="[{ required: true, message: '请填写用户名' }]"
-                  />
-                  <van-field
-                    v-model="password"
-                    type="password"
-                    name="密码"
-                    label="密码"
-                    placeholder="密码"
-                    :rules="[{ required: true, message: '请填写密码' }]"
-                  />
-                  <div style="margin: 16px;">
-                    <van-button round block type="info" native-type="submit">
-                      提交
-                    </van-button>
-                  </div>
-                </van-form> -->
-              
+            </div>
+            <div class="emilLogin">
+              <div plain class="btn" color="#DD1A21">
+                <i class="emilIcon"></i>
+                <span class="emilText">邮箱账号登录</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="loginTypeContainer">
+            <div class="loginType">
+              <div class="item weixin">
+                <img src="../../../public/images/weixin.png" alt="">
+                <div>微信</div>
+              </div>
+              <div class="item qq">
+                <img src="../../../public/images/qq.png" alt="">
+                <div>QQ</div>
+              </div>
+              <div class="item weibo">
+                <img src="../../../public/images/weibo.png" alt="">
+                <div>微博</div>
+              </div>
             </div>
         </div>
       </div>
-    </van-overlay>
+        <!-- 登录页面 -->
+      <van-overlay :show="show" @click="show = false">
+        <div class="wrapper" @click.stop>
+          <div class="block">
+              <div class="loginwrap">
+                <div class="loginHeader">
+                  <img src="../../../public/images/logobig.png" alt="">
+                </div>
+                  <van-form class="vanForm" @submit="onSubmit">
+                    <van-field
+                      v-model="username"
+                      type="username"
+                      placeholder="请输入手机号"
+                      :rules="[{ required: true }]"
+                    />
+                    <van-field
+                      class="code"
+                      v-model="password"
+                      type="password"
+                      placeholder="请输入短信验证码"
+                      :rules="[{ required: true    }]"
+                    />
+                    <div style="margin: 16px;">
+                      <van-button class="submit" color="#DD1A21" block type="info" native-type="submit">
+                        提交
+                      </van-button>
+                    </div>
+                  </van-form>
+                  <div class="getCode" :class="{display: showC === false}" @click="None">获取验证码</div>
+                  <div class="getCode count" :class="{display: showC === true}">{{count}}</div>
+                  <div class="problemContainer">
+                    <a target="_blank" href="https://aq.reg.163.com/ydaq/offline" class="problem">遇到问题?</a>
+                    <div class="passwordLogin">使用密码验证登录</div>
+                  </div>
+                  <div class="agreeContainer">
+                    <!-- <input type="checkbox"> -->
+                    <van-radio-group class="checkBox" v-model="radio">
+                      <van-radio name="1" checked-color="#ccc" shape="square"></van-radio>
+                    </van-radio-group>
+                    <span>我同意</span>
+                    <!-- target="_blank"   跳转并打开新页面 -->
+                    <a target="_blank" href="https://reg.163.com/agreement_mobile_wap.shtml?v=20171127">《服务条款》</a>
+                    <span>和</span>
+                    <a target="_blank" href="https://reg.163.com/agreement_mobile_ysbh_wap.shtml?v=20171127">《网易隐私政策》</a>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </van-overlay>
+    </div>
+    <div v-else>
+      <loginPersonalVue></loginPersonalVue>
+    </div>
   </div>
 </template>
 
 <script>
 import $globalEventBus from '../../main.js'
+import loginPersonalVue from './loginPersonal.vue'
 export default {
   data() {
     return {
+      radio: '1',
       show: false,
       username: '',
       password: '',
+      showC: true,
+      count: 5,
+      login: []
     }
+  },
+  components:{
+    loginPersonalVue
   },
   mounted(){
     this.$globalEventBus.$emit("display", 'sousuo')
+    let login = localStorage.getItem('login')
+    this.login = login
+    if(login){
+      this.$globalEventBus.$emit("display", 'index')
+    }
   },
   methods:{
+    None(){
+      console.log('show');
+      this.showC = false
+      setInterval(() => {
+       if(this.count>0){
+          this.count -= 1
+       }else{
+         this.showC = true
+       }
+      }, 1000)
+    },
     onSubmit(values) {
-      console.log('submit', values);
+      // console.log('submit', values);
+      if(values){
+        this.$router.push('./loginPersonal')
+        localStorage.setItem('login', [1,2,3])
+      }
     },
     toIndex(){
       this.$globalEventBus.$emit('active', '/index')
-      this.$router.push('./index')
+      this.$router.push('/index')
       let tabBar = document.querySelector('.tabBarWrap')
       tabBar.style.display='block'
     },
@@ -228,9 +275,7 @@ export default {
 .loginButtonContainer{
   width: 100%;
   height: 110*2px;
-  // padding-bottom: 200*2px;
-  // display: flex;
-  padding: 0 20*2px 110%;
+  padding: 0 20*2px 100%;
   box-sizing: border-box;
 }
 .btn{
@@ -301,5 +346,64 @@ i{
 }
 .weibo{
   border:none;
+}
+
+// vanForm
+.vanForm{
+  margin-top: 40px;
+}
+.code{
+  margin-top: 40px;
+}
+.getCode{
+  width: 82.11*2px;
+  height: 26.77*2px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  position: absolute;
+  top: 203*2px;
+  right: 25*2px;
+  text-align: center;
+  line-height: 26.77*2px;
+}
+.submit{
+  margin-top: 55*2px;
+}
+.problemContainer{
+  width: 100%;
+  position: absolute;
+  top: 263*2px;
+  padding: 0 17*2px;
+  display: flex;
+  justify-content: space-between;
+}
+.problem{
+  color: #979797;
+  font-size: 0.2rem;
+}
+.passwordLogin{
+ font-size: 0.2rem
+}
+.agreeContainer{
+  width: 100%;
+  height: 24*2px;
+  line-height: 24*2px;
+  padding: 0 17*2px;
+  vertical-align: middle;
+  display: flex;
+  color: #7f7f7f;
+  font-size: 12px;
+}
+.checkBox{
+  margin-right: 20px;
+}
+.agreeContainer a{
+  color: #007AFF;
+}
+.display{
+  display: none;
+}
+.count{
+  color: #979797;
 }
 </style>
